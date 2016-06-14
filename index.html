@@ -168,9 +168,32 @@
                         </div>
                     </section>
 
-
                     <section id="use-cases" inlist="" rel="schema:hasPart" resource="#use-cases">
                         <h2 property="schema:name">Use cases</h2>
+                        <div datatype="rdf:HTML" property="schema:description">
+                        </div>
+                    </section>
+
+                    <section id="design-and-architecture" inlist="" rel="schema:hasPart" resource="#design-and-architecture">
+                        <h2 property="schema:name">Design and Architecture</h2>
+                        <div datatype="rdf:HTML" property="schema:description">
+                            <p>Workflow:</p>
+                            <ol>
+                                <li>User enters text in a sentence e.g., 'GDP of Canada'</li>
+                                <li>User selects text 'GDP of Canada' with their mouse or keyboard</li>
+                                <li>The authoring toolbar is presented to the user, and user selects 'sparkline'</li>
+                                <li>The input text is split into two: 1) 'GDP' and 2) 'Canada'</li>
+                                <li>SPARQL query URL is constructed and sent to the World Bank Linked Dataspace endpoint, looking for a graph pattern where the datasets of labels have 'GDP' in them in which there is at least one observation for the reference area 'Canada'.</li>
+                                <li>User is is given a list of datasets to select from which match the above criteria, and the user selects a dataset</li>
+                                <li>SPARQL query to get the observations of the selected dataset for Canada is sent</li>
+                                <li>A sparkline is created and displayed for the user, also indicating the number of observations it has</li>
+                                <li>User submits the sparkline to be included in the text, a hyperlink to the dataset, and a sparkline SVG is inserted back into the sentence replacing 'GDP of Canada'.</li>
+                            </ol>
+                        </div>
+                    </section>
+
+                    <section id="user-study" inlist="" rel="schema:hasPart" resource="#user-study">
+                        <h2 property="schema:name">User study</h2>
                         <div datatype="rdf:HTML" property="schema:description">
                         </div>
                     </section>
