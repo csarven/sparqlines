@@ -71,7 +71,7 @@
                     <section id="abstract">
                         <h2>Abstract</h2>
                         <div datatype="rdf:HTML" property="schema:abstract">
-                          <p>Inline-charts or <a href="https://en.wikipedia.org/wiki/Sparkline"><em>sparkline</em></a> are intended to be concise and located where they are discussed in the text. They are treated as <em>datawords</em> carrying dense information. <cite><a href="http://www.edwardtufte.com/">Edward Tufte</a></cite> describes sparkline as <q cite="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR"><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR">small intense, simple, word-sized graphic with typographic resolution</a></q>. For example, the 
+                          <p>Inline-charts or <a href="https://en.wikipedia.org/wiki/Sparkline"><em>sparkline</em></a> are concise, and located where they are discussed in the text. They are treated as <em>datawords</em> carrying dense information. <cite><a href="http://www.edwardtufte.com/">Edward Tufte</a></cite> describes sparkline as <q cite="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR"><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR">small intense, simple, word-sized graphic with typographic resolution</a></q>. For example, the 
                                     <span rel="schema:hasPart" resource="#figure-GDP-per-capita-growth--annual---">
                                         <a href="http://worldbank.270a.info/dataset/NY.GDP.PCAP.KD.ZG" property="schema:name" rel="prov:wasDerivedFrom" resource="http://worldbank.270a.info/dataset/NY.GDP.PCAP.KD.ZG" typeof="qb:DataSet">GDP per capita growth (annual %)</a> [Canada]
                                         <span class="sparkline" rel="schema:image" resource="#GDP-per-capita-growth--annual---">
@@ -176,9 +176,34 @@
                     <section id="use-cases" inlist="" rel="schema:hasPart" resource="#use-cases">
                         <h2 property="schema:name">Use cases</h2>
                         <div datatype="rdf:HTML" property="schema:description">
-                            <p>..Dynamic reference</p>
-                            <p>..Static reference</p>
-                            <p>..Embedded</p>
+                            <section id="dynamic-reference" inlist="" rel="schema:hasPart" resource="#dynamic-reference">
+                                <h3 property="schema:name">Dynamic reference</h3>
+                                <div datatype="rdf:HTML">
+                                    <p>Use embed/object to call a URL which builds itself and returns an SVG</p>
+                                </div>
+                            </section>
+
+                            <section id="static-reference" inlist="" rel="schema:hasPart" resource="#static--reference">
+                                <h3 property="schema:name">Static reference</h3>
+                                <div datatype="rdf:HTML">
+                                    <p>embed SVG body in document</p>
+                                </div>
+                            </section>
+
+                            <section id="interactive-inclusion" inlist="" rel="schema:hasPart" resource="#interactive-inclusion">
+                                <h3 property="schema:name">Interactive inclusion</h3>
+                                <div datatype="rdf:HTML">
+                                    <p>User embedding with the flow of the text</p>
+                                    <figure id="figure-dokieli-sparkline" rel="schema:hasPart" resource="#figure-dokieli-sparkline">
+                                        <video id="video-dokieli-sparkline" rel="schema:hasPart" preload="none" controls="controls" width="800" height="600">
+                                            <source about="#video-dokieli-sparkline" rel="schema:hasPart" resource="http://dokie.li/media/video/dokieli-sparkline.webm"  typeof="fabio:Film" src="http://dokie.li/media/video/dokieli-sparkline.webm" type="video/webm">
+                                                <span about="http://dokie.li/media/video/dokieli-sparkline.webm" property="schema:name">Video of Sparkline interaction in dokieli</span>
+                                            </source>
+                                        </video>
+                                        <figcaption property="schema:name">Video of Sparkline interaction in dokieli</figcaption>
+                                    </figure>
+                                </div>
+                            </section>
                         </div>
                     </section>
 
