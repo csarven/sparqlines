@@ -178,17 +178,12 @@
                     <section id="use-cases" inlist="" rel="schema:hasPart" resource="#use-cases">
                         <h2 property="schema:name">Use cases</h2>
                         <div datatype="rdf:HTML" property="schema:description">
-                            <section id="dynamic-reference" inlist="" rel="schema:hasPart" resource="#dynamic-reference">
-                                <h3 property="schema:name">Dynamic reference</h3>
-                                <div property="schema:description" datatype="rdf:HTML">
-                                    <p>Use embed/object to call a URL which builds itself and returns an SVG</p>
-                                </div>
-                            </section>
-
                             <section id="static-reference" inlist="" rel="schema:hasPart" resource="#static--reference">
                                 <h3 property="schema:name">Static reference</h3>
                                 <div property="schema:description" datatype="rdf:HTML">
                                     <p>embed SVG body in document</p>
+                                    <p>Fixed data.</p>
+
                                     <figure id="figure-static-sparkline" rel="schema:hasPart" resource="#figure-static-sparkline">
                                         <object data="media/images/GDP-per-capita-growth--annual---.svg" height="240" rel="schema:image" type="image/svg+xml" width="640"></object>
                                         <figcaption property="schema:name">Static SVG</figcaption>
@@ -196,10 +191,34 @@
                                 </div>
                             </section>
 
-                            <section id="interactive-inclusion" inlist="" rel="schema:hasPart" resource="#interactive-inclusion">
-                                <h3 property="schema:name">Interactive inclusion</h3>
+                            <section id="dynamic-reference" inlist="" rel="schema:hasPart" resource="#dynamic-reference">
+                                <h3 property="schema:name">Dynamic reference</h3>
                                 <div property="schema:description" datatype="rdf:HTML">
-                                    <p>User embedding with the flow of the text. Viewers of this article in a Web browser can replicate the process by enabling the <button class="editor-enable" title="Enable editor"><i class="fa fa-i-cursor"></i>Edit</button> mode in dokieli and highlighting the text: <samp id="interactive-inclusion-example">GDP of Canada</samp>. The complete workflow is discussed in the <a href="#design-and-architecture">Design and Architecture</a> section. Figure [<a href="#figure-dokieli-sparkline">2</a>] is a video screencast of this interaction.</p>
+                                    <p>Use embed/object to call a URL which builds itself and returns an SVG</p>
+                                    <p>Live data. Could also be asynchronously polled / streamed.</p>
+                                </div>
+                            </section>
+
+                            <section id="interactive-annotation" inlist="" rel="schema:hasPart" resource="#interactive-annotation">
+                                <h3 property="schema:name">Interactive Annotation</h3>
+                                <div property="schema:description" datatype="rdf:HTML">
+                                    <p>The author of an article wishes to include a sparkline by way of annotating a span of text in a paragraph with a publicly accessible statistical dataset on the Web. The author selects a desired matching dataset to their initial inquiry, and includes both a reference to the source dataset and the corresponding sparkline.</p>
+
+                                    <p>Viewers of this article in a Web browser can replicate the workflow by enabling the <button class="editor-enable" title="Enable editor"><i class="fa fa-i-cursor"></i>Edit</button> mode from the <button>☰</button> menu and highlighting the text: <samp id="interactive-annotation-example">GDP of Canada</samp>:</p>
+
+                                    <ol about="interactive-annotation-workflow" typeof="opmw:WorkflowTemplate deo:Model">
+                                        <li id="interactive-annotation-text-entry" about="#interactive-annotation-text-entry" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User enters text in a sentence e.g., <samp>GDP of Canada</samp></li>
+                                        <li id="interactive-annotation-text-selection" about="#interactive-annotation-text-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User selects text <samp>GDP of Canada</samp> with their mouse or keyboard</li>
+                                        <li id="interactive-annotation-toolbar-selection" about="#interactive-annotation-toolbar-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">The authoring toolbar is presented to the user, and user selects the <q>sparkline</q> option</li>
+                                        <li id="interactive-annotation-tokenise-text" about="#interactive-annotation-tokenise-text" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">The input text is split into two: 1) <samp>GDP</samp> and 2) <samp>Canada</samp> segments</li>
+                                        <li id="interactive-annotation-sparql-query-for-input" about="#interactive-annotation-sparql-query-for-input" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">Systems constructs a SPARQL query URL and sends it to the World Bank Linked Dataspace endpoint, looking for a graph pattern where the datasets of labels have <q>GDP</q> in them in which there is at least one observation for the reference area <q>Canada</q></li>
+                                        <li id="interactive-annotation-dataset-selection" about="#interactive-annotation-dataset-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User is is given a list of datasets to select from which match the above criteria, and the user selects desired dataset</li>
+                                        <li id="interactive-annotation-sparql-query-observations" about="#interactive-annotation-sparql-query-observations" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">System sends a SPARQL query to get the observations of the selected dataset for Canada</li>
+                                        <li id="interactive-annotation-create-sparkline" about="#interactive-annotation-create-sparkline" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">A sparkline is created and displayed for the user, also indicating the number of observations it has</li>
+                                        <li id="interactive-annotation-embed-sparkline" about="#interactive-annotation-embed-sparkline" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User submits the sparkline to be included in the text, a hyperlink to the dataset, and a sparkline SVG is inserted back into the sentence replacing <samp>GDP of Canada</samp> with <samp>GDP per capita growth (annual %)</samp></li>
+                                    </ol>
+
+                                    <p>Figure [<a href="#figure-dokieli-sparkline">2</a>] is a video screencast of this interaction.</p>
 
                                     <figure id="figure-dokieli-sparkline" rel="schema:hasPart" resource="#figure-dokieli-sparkline">
                                         <video controls="controls" height="600" id="video-dokieli-sparkline" poster="media/images/GDP-per-capita-growth--annual---.svg" preload="none" rel="schema:hasPart" width="800">
@@ -211,8 +230,8 @@
                                     </figure>
 
                                     <style type="text/css">/*<![CDATA[*/
-                                        #interactive-inclusion .editor-enable,
-                                        #interactive-inclusion .editor-disable {
+                                        #interactive-annotation .editor-enable,
+                                        #interactive-annotation .editor-disable {
                                             background-color: #fff;
                                             border: 0 none;
                                             font-family: sans-serif;
@@ -221,7 +240,11 @@
                                             margin: 0;
                                             padding: 0;
                                         }
-                                        #interactive-inclusion .editor-disable {
+                                        #interactive-annotation .editor-enable i,
+                                        #interactive-annotation .editor-disable i {
+                                            margin-right:0.25em;
+                                        }
+                                        #interactive-annotation .editor-disable {
                                             background-color:#eee;
                                         }
                                     /*]]>*/</style>
@@ -233,18 +256,7 @@
                     <section id="design-and-architecture" inlist="" rel="schema:hasPart" resource="#design-and-architecture">
                         <h2 property="schema:name">Design and Architecture</h2>
                         <div datatype="rdf:HTML" property="schema:description">
-                            <p>Workflow:</p>
-                            <ol>
-                                <li>User enters text in a sentence e.g., 'GDP of Canada'</li>
-                                <li>User selects text 'GDP of Canada' with their mouse or keyboard</li>
-                                <li>The authoring toolbar is presented to the user, and user selects 'sparkline'</li>
-                                <li>The input text is split into two: 1) 'GDP' and 2) 'Canada'</li>
-                                <li>SPARQL query URL is constructed and sent to the World Bank Linked Dataspace endpoint, looking for a graph pattern where the datasets of labels have 'GDP' in them in which there is at least one observation for the reference area 'Canada'.</li>
-                                <li>User is is given a list of datasets to select from which match the above criteria, and the user selects a dataset</li>
-                                <li>SPARQL query to get the observations of the selected dataset for Canada is sent</li>
-                                <li>A sparkline is created and displayed for the user, also indicating the number of observations it has</li>
-                                <li>User submits the sparkline to be included in the text, a hyperlink to the dataset, and a sparkline SVG is inserted back into the sentence replacing 'GDP of Canada'.</li>
-                            </ol>
+
                         </div>
                     </section>
 
