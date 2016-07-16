@@ -44,7 +44,7 @@
 
                 <dl id="document-inbox">
                     <dt>Notifications Inbox</dt>
-                    <dd><a href="https://linkedresearch.org/inbox/" rel="solid:inbox">inbox/</a></dd>
+                    <dd><a href="https://linkedresearch.org/inbox/temp/sparqlines/" rel="solid:inbox">inbox/</a></dd>
                 </dl>
 
                 <dl id="document-published">
@@ -54,7 +54,7 @@
 
                 <dl id="document-modified">
                     <dt>Modified</dt>
-                    <dd><time datatype="xsd:dateTime" datetime="2016-10-14T00:00:00Z" property="schema:dateModified">2016-10-14</time></dd>
+                    <dd><time datatype="xsd:dateTime" datetime="2016-07-16T00:00:00Z" property="schema:dateModified">2016-07-16</time></dd>
                 </dl>
 
                 <dl id="document-in-reply-to">
@@ -71,12 +71,12 @@
                     <section id="abstract">
                         <h2>Abstract</h2>
                         <div datatype="rdf:HTML" property="schema:abstract">
-                          <p>Inline-charts or <a href="https://en.wikipedia.org/wiki/Sparkline"><em>sparkline</em></a> are concise, and located where they are discussed in the text. They are treated as <em>datawords</em> carrying dense information. <cite><a href="http://www.edwardtufte.com/">Edward Tufte</a></cite> describes sparkline as <q cite="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR"><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR">small intense, simple, word-sized graphic with typographic resolution</a></q>. For example, the 
+                          <p>This article presents interfaces to embed statistical observations fetched from SPARQL endpoints as inline-charts. Inline-charts, also known as <a href="https://en.wikipedia.org/wiki/Sparkline"><em>Sparkline</em></a> are concise, and located where they are discussed in the text. They are treated as <em>datawords</em> carrying dense information. <cite><a href="http://www.edwardtufte.com/">Edward Tufte</a></cite> describes sparkline as <q cite="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR"><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR">small intense, simple, word-sized graphic with typographic resolution</a></q>. For example, the 
                                     <span rel="schema:hasPart" resource="#figure-GDP-per-capita-growth--annual---">
                                         <a href="http://worldbank.270a.info/dataset/NY.GDP.PCAP.KD.ZG" property="schema:name" rel="prov:wasDerivedFrom" resource="http://worldbank.270a.info/dataset/NY.GDP.PCAP.KD.ZG" typeof="qb:DataSet">GDP per capita growth (annual %)</a> [Canada]
                                         <span class="sparkline" rel="schema:image" resource="#GDP-per-capita-growth--annual---">
-                                            <svg height="100%" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# qb: http://purl.org/linked-data/cube# prov: http://www.w3.org/ns/prov# schema: https://schema.org/" version="1.1" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
-                                                <style type="text/css"><![CDATA[ line { stroke:#000; stroke-width:1px; } circle { stroke:#f00; fill:#f00; } ]]></style>
+                                            <svg height="100%" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# xsd: http://www.w3.org/2001/XMLSchema# qb: http://purl.org/linked-data/cube# prov: http://www.w3.org/ns/prov# schema: https://schema.org/" version="1.1" width="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <style type="text/css">/*<![CDATA[*/line { stroke:#000; stroke-width:1px; } circle { stroke:#f00; fill:#f00; }/*]]>*/</style>
                                                 <g rel="prov:wasDerivedFrom" resource="http://worldbank.270a.info/dataset/NY.GDP.PCAP.KD.ZG">
                                                     <metadata rel="schema:license" resource="https://creativecommons.org/publicdomain/zero/1.0/" />
                                                     <title property="schema:name">GDP per capita growth (annual %)</title>
@@ -136,7 +136,7 @@
                                                 </g>
                                             </svg>
                                         </span>
-                                    </span> claimed by the <a href="http://worldbank.270a.info/">World Bank Linked Dataspace</a>. This brief demonstration of Linked Statistical Data Sparkline, 1) compliments the supporting text without breaking the reader’s flow, and 2) provides an opportunity for the reader to investigate further by clicking on the data-line to access the source. This article itself is a dokieli instance, available to interact with at <a href="http://csarven.ca/sparql-to-sparklines">http://csarven.ca/sparql-to-sparklines</a>.</p>
+                                    </span> claimed by the <a href="http://worldbank.270a.info/">World Bank Linked Dataspace</a>. This brief demonstration of Linked Statistical Data Sparkline, 1) compliments the supporting text without breaking the reader’s flow, and 2) provides an opportunity for the reader to investigate further by clicking on the data-line to access the source. This article itself is a dokieli instance that includes different Sparkline use-cases and is available to interact with at <a href="http://csarven.ca/sparql-to-sparklines">http://csarven.ca/sparql-to-sparklines</a>.</p>
                         </div>
                     </section>
 
@@ -168,7 +168,9 @@
                     <section id="related-work" inlist="" rel="schema:hasPart" resource="#related-work">
                         <h2 property="schema:name">Related Work</h2>
                         <div datatype="rdf:HTML" property="schema:description" resource="#related-work" typeof="deo:RelatedWork">
-                            <p>What's out here?</p>
+                            <p>What's out there?</p>
+                            <p>http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR&amp;topic_id=1</p>
+                            <p>Google Docs / Sparkline</p>
                             <p>What's in their scope?</p>
                         </div>
                     </section>
@@ -178,30 +180,51 @@
                         <div datatype="rdf:HTML" property="schema:description">
                             <section id="dynamic-reference" inlist="" rel="schema:hasPart" resource="#dynamic-reference">
                                 <h3 property="schema:name">Dynamic reference</h3>
-                                <div datatype="rdf:HTML">
+                                <div property="schema:description" datatype="rdf:HTML">
                                     <p>Use embed/object to call a URL which builds itself and returns an SVG</p>
                                 </div>
                             </section>
 
                             <section id="static-reference" inlist="" rel="schema:hasPart" resource="#static--reference">
                                 <h3 property="schema:name">Static reference</h3>
-                                <div datatype="rdf:HTML">
+                                <div property="schema:description" datatype="rdf:HTML">
                                     <p>embed SVG body in document</p>
+                                    <figure id="figure-static-sparkline" rel="schema:hasPart" resource="#figure-static-sparkline">
+                                        <object data="media/images/GDP-per-capita-growth--annual---.svg" height="240" rel="schema:image" type="image/svg+xml" width="640"></object>
+                                        <figcaption property="schema:name">Static SVG</figcaption>
+                                    </figure>
                                 </div>
                             </section>
 
                             <section id="interactive-inclusion" inlist="" rel="schema:hasPart" resource="#interactive-inclusion">
                                 <h3 property="schema:name">Interactive inclusion</h3>
-                                <div datatype="rdf:HTML">
-                                    <p>User embedding with the flow of the text</p>
+                                <div property="schema:description" datatype="rdf:HTML">
+                                    <p>User embedding with the flow of the text. Viewers of this article in a Web browser can replicate the process by enabling the <button class="editor-enable" title="Enable editor"><i class="fa fa-i-cursor"></i>Edit</button> mode in dokieli and highlighting the text: <samp id="interactive-inclusion-example">GDP of Canada</samp>. The complete workflow is discussed in the <a href="#design-and-architecture">Design and Architecture</a> section. Figure [<a href="#figure-dokieli-sparkline">2</a>] is a video screencast of this interaction.</p>
+
                                     <figure id="figure-dokieli-sparkline" rel="schema:hasPart" resource="#figure-dokieli-sparkline">
-                                        <video id="video-dokieli-sparkline" rel="schema:hasPart" preload="none" controls="controls" width="800" height="600">
-                                            <source about="#video-dokieli-sparkline" rel="schema:hasPart" resource="http://dokie.li/media/video/dokieli-sparkline.webm"  typeof="fabio:Film" src="http://dokie.li/media/video/dokieli-sparkline.webm" type="video/webm">
-                                                <span about="http://dokie.li/media/video/dokieli-sparkline.webm" property="schema:name">Video of Sparkline interaction in dokieli</span>
+                                        <video controls="controls" height="600" id="video-dokieli-sparkline" poster="media/images/GDP-per-capita-growth--annual---.svg" preload="none" rel="schema:hasPart" width="800">
+                                            <source about="#video-dokieli-sparkline" rel="schema:hasPart" resource="https://dokieli/media/video/dokieli-sparkline.webm" src="https://dokieli/media/video/dokieli-sparkline.webm" type="video/webm" typeof="fabio:Film">
+                                                <span about="https://dokieli/media/video/dokieli-sparkline.webm" property="schema:name">Video of Sparkline interaction in dokieli</span>
                                             </source>
                                         </video>
                                         <figcaption property="schema:name">Video of Sparkline interaction in dokieli</figcaption>
                                     </figure>
+
+                                    <style type="text/css">/*<![CDATA[*/
+                                        #interactive-inclusion .editor-enable,
+                                        #interactive-inclusion .editor-disable {
+                                            background-color: #fff;
+                                            border: 0 none;
+                                            font-family: sans-serif;
+                                            font-size: 1em;
+                                            font-weight: normal;
+                                            margin: 0;
+                                            padding: 0;
+                                        }
+                                        #interactive-inclusion .editor-disable {
+                                            background-color:#eee;
+                                        }
+                                    /*]]>*/</style>
                                 </div>
                             </section>
                         </div>
