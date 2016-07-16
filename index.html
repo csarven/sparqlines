@@ -206,7 +206,7 @@
 
                                     <p>Viewers of this article in a Web browser can replicate the workflow by enabling the <button class="editor-enable" title="Enable editor"><i class="fa fa-i-cursor"></i>Edit</button> mode from the <button>☰</button> menu and highlighting the text: <samp id="interactive-annotation-example">GDP of Canada</samp>:</p>
 
-                                    <ol about="interactive-annotation-workflow" typeof="opmw:WorkflowTemplate deo:Model">
+                                    <ol property="schema:hasPart" resource="#interactive-annotation-workflow" typeof="opmw:WorkflowTemplate deo:Model">
                                         <li id="interactive-annotation-text-entry" about="#interactive-annotation-text-entry" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User enters text in a sentence e.g., <samp>GDP of Canada</samp></li>
                                         <li id="interactive-annotation-text-selection" about="#interactive-annotation-text-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User selects text <samp>GDP of Canada</samp> with their mouse or keyboard</li>
                                         <li id="interactive-annotation-toolbar-selection" about="#interactive-annotation-toolbar-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">The authoring toolbar is presented to the user, and user selects the <q>sparkline</q> option</li>
