@@ -136,7 +136,7 @@
                                                 </g>
                                             </svg>
                                         </span>
-                                    </span> claimed by the <a href="http://worldbank.270a.info/">World Bank Linked Dataspace</a>. This brief demonstration of Linked Statistical Data Sparkline, 1) compliments the supporting text without breaking the reader’s flow, and 2) provides an opportunity for the reader to investigate further by clicking on the data-line to access the source. This article itself is a dokieli instance that includes different sparkline use-cases and is available for interaction at <a href="http://csarven.ca/sparqline-sparql-to-sparkline">http://csarven.ca/sparqline-sparql-to-sparkline</a>.</p>
+                                    </span> claimed by the <a href="http://worldbank.270a.info/">World Bank Linked Dataspace</a>. This brief demonstration of Linked Statistical Data Sparkline, 1) compliments the supporting text without breaking the reader’s flow, and 2) provides an opportunity for the reader to investigate further by clicking on the data-line to access the source. This article is created with dokieli includes sparkline use-cases and is interactive; <a href="http://csarven.ca/sparqline-sparql-to-sparkline">http://csarven.ca/sparqline-sparql-to-sparkline</a>.</p>
                         </div>
                     </section>
 
@@ -156,7 +156,9 @@
                     <section id="introduction" inlist="" rel="schema:hasPart" resource="#introduction">
                         <h2 property="schema:name">Introduction</h2>
                         <div datatype="rdf:HTML" property="schema:description">
-                            <p>In this article we introduce <em>sparqlines</em>, an integration of statistical data retrieval using SPARQL and displaying the observations in the form of word-size graphics (Sparkline).
+                            <p>In this article we introduce <em>sparqlines</em>, an integration of statistical data retrieval using SPARQL and displaying the observations in the form of word-size graphics; sparkline.</p>
+
+                            <p>The earliest known implementation of inline-chart was designed and programmed by Peter Zelchenko and Mike Medved to represent historical charts efficiently in the QuoteTracker software [<a href="http://pete.zelchenko.com/portfolio/screen/2gk.htm"></a>].</p>
 
                             <p><a href="https://en.wikipedia.org/wiki/Sparkline"><em>Sparkline</em></a> are small line-charts designed to be embedded in text supporting uninterrupted reading <embed class="sparkline" src="media/images/GDP-per-capita-growth--annual---.svg" type="image/svg+xml" /> without recourse to a separate figure elsewhere in the document e.g., see Figure [<a href="#figure-static-sparkline">1</a>]. They are treated as <em>datawords</em> carrying dense information. <cite><a href="http://www.edwardtufte.com/">Edward Tufte</a></cite> describes sparkline as <q cite="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR"><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR">small intense, simple, word-sized graphic with typographic resolution</a></q> [].</p>
 
@@ -167,6 +169,7 @@
                             <p>Why bother doing this?</p>
                             <p>..</p>
 
+                            <p>Sparkline appear in many places where small datafeeds are useful; programmatical insertion in text-editors and spreadsheets, fitness feeds from watches, social media analytics, streaming real-time quotes, system dashboards and trays, stock and temperature activity, to name a few.</p>
 
                             <figure id="figure-static-sparkline" rel="schema:hasPart" resource="#figure-static-sparkline">
                                 <object style="min-height:120px !important;" data="media/images/GDP-per-capita-growth--annual---.svg" height="120" rel="schema:image" type="image/svg+xml" width="640"></object>
@@ -263,9 +266,13 @@
                     <section id="design-and-architecture" inlist="" rel="schema:hasPart" resource="#design-and-architecture">
                         <h2 property="schema:name">Design and Architecture</h2>
                         <div datatype="rdf:HTML" property="schema:description">
+                            <p><strong>User interaction</strong>:</p>
                             <p><strong>Text to URL</strong>:</p>
-                            <p><strong>Banking to 45°<strong>:</p>
-                            <p>Dimensions, measures, attributes</p>
+                            <p><strong>Data cube</strong>:</p>
+                            <p><strong>SPARQL queries</strong>:</p>
+                            <p><strong>Design principles</strong>: readability, banking to 45°</p>
+                            <p><strong>Media embedding</strong>:</p>
+                            <p><strong>Semantic publishing</strong>:</p>
                         </div>
                     </section>
 
