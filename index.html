@@ -191,11 +191,42 @@
                     <section id="use-cases" inlist="" rel="schema:hasPart" resource="#use-cases">
                         <h2 property="schema:name">Use cases</h2>
                         <div datatype="rdf:HTML" property="schema:description">
+                            <p>In this section we describe the system requirements for each use case with a description and then specify the corresponding data shape. We then provide possible methods for this implementation, a workflow for an implementation, and then demonstrate within this article.</p>
+
                             <section id="static-reference" inlist="" rel="schema:hasPart" resource="#static--reference">
                                 <h3 property="schema:name">Static reference</h3>
                                 <div property="schema:description" datatype="rdf:HTML">
-                                    <p>embed SVG body in document <embed class="sparkline" src="media/images/GDP-per-capita-growth--annual---.svg" height="240" rel="schema:image" type="image/svg+xml" width="640" /></p>
-                                    <p>Fixed data.</p>
+                                    <dl>
+                                        <dt>Description</dt>
+                                        <dd>Human author wants to include a graphic (SVG) in article. Author uses the system to import a pre-built figure to desired location in the article.</dd>
+                                    </dl>
+
+                                    <dl>
+                                        <dt>Data Shape</dt>
+                                        <dd>Static data. Suitable for displaying historical data</dd>
+                                    </dl>
+
+                                    <dl>
+                                        <dt>Methods</dt>
+                                        <dd>File upload or drag-drop from desktop, or link to an external image or embed the image data using the data URI.</dd>
+                                    </dl>
+
+                                    <dl>
+                                        <dt>Workflow</dt>
+                                        <dd>
+                                            <ol property="schema:hasPart" resource="#static-reference-workflow" typeof="opmw:WorkflowTemplate deo:Model">
+                                                <li id="static-reference-import-figure" about="#static-reference-import-figure" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#static-reference-workflow" property="rdfs:label">User clicks 'Import sparkline' button</li>
+                                                <li id="static-reference-select-figure" about="#static-reference-select-figure" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#static-reference-workflow" property="rdfs:label">User browses to file on desktop system and select</li>
+                                                <li id="static-reference-upload-figure" about="#static-reference-upload-figure" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#static-reference-workflow" property="rdfs:label">User clicks 'Upload' button</li>
+                                            </ol>
+                                        </dd>
+                                    </dl>
+
+                                    <dl>
+                                        <dt>Example</dt>
+                                        <dd><span rel="schema:hasPart" resource="#figure-GDP-per-capita-growth--annual---">
+                                        <a href="http://worldbank.270a.info/dataset/NY.GDP.PCAP.KD.ZG" property="schema:name" rel="prov:wasDerivedFrom" resource="http://worldbank.270a.info/dataset/NY.GDP.PCAP.KD.ZG" typeof="qb:DataSet">GDP per capita growth (annual %)</a> [Canada] <span class="sparkline" rel="schema:image" resource="#GDP-per-capita-growth--annual---"><embed class="sparkline" src="media/images/GDP-per-capita-growth--annual---.svg" height="240" rel="schema:image" type="image/svg+xml" width="640" /></span></span></dd>
+                                    </dl>
                                 </div>
                             </section>
 
