@@ -241,52 +241,78 @@
                             <section id="interactive-annotation" inlist="" rel="schema:hasPart" resource="#interactive-annotation">
                                 <h3 property="schema:name">Interactive Annotation</h3>
                                 <div property="schema:description" datatype="rdf:HTML">
-                                    <p>The author of an article wishes to include a sparkline by way of annotating a span of text in a paragraph with a publicly accessible statistical dataset on the Web. The author selects a desired matching dataset to their initial inquiry, and includes both a reference to the source dataset and the corresponding sparkline.</p>
+                                    <dl>
+                                        <dt>Description</dt>
+                                        <dd>The author of an article wishes to include a sparkline by way of annotating a span of text in a paragraph with a publicly accessible statistical dataset on the Web. The author selects a desired matching dataset to their initial inquiry, and includes both a reference to the source dataset and the corresponding sparkline.</dd>
+                                    </dl>
 
-                                    <p>Viewers of this article in a Web browser can replicate the workflow by enabling the <button class="editor-enable" title="Enable editor"><i class="fa fa-i-cursor"></i>Edit</button> mode from the <button>☰</button> menu and highlighting the text: <samp id="interactive-annotation-example">GDP of Canada</samp>:</p>
+                                    <dl>
+                                        <dt>Data Shape</dt>
+                                        <dd>Static data. Suitable for displaying historical data</dd>
+                                    </dl>
 
-                                    <ol property="schema:hasPart" resource="#interactive-annotation-workflow" typeof="opmw:WorkflowTemplate deo:Model">
-                                        <li id="interactive-annotation-text-entry" about="#interactive-annotation-text-entry" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User enters text in a sentence e.g., <samp>GDP of Canada</samp></li>
-                                        <li id="interactive-annotation-text-selection" about="#interactive-annotation-text-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User selects text <samp>GDP of Canada</samp> with their mouse or keyboard</li>
-                                        <li id="interactive-annotation-toolbar-selection" about="#interactive-annotation-toolbar-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">The authoring toolbar is presented to the user, and user selects the <q>sparkline</q> option</li>
-                                        <li id="interactive-annotation-tokenise-text" about="#interactive-annotation-tokenise-text" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">The input text is split into two: 1) <samp>GDP</samp> and 2) <samp>Canada</samp> segments</li>
-                                        <li id="interactive-annotation-sparql-query-for-input" about="#interactive-annotation-sparql-query-for-input" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">Systems constructs a SPARQL query URL and sends it to the World Bank Linked Dataspace endpoint, looking for a graph pattern where the datasets of labels have <q>GDP</q> in them in which there is at least one observation for the reference area <q>Canada</q></li>
-                                        <li id="interactive-annotation-dataset-selection" about="#interactive-annotation-dataset-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User is is given a list of datasets to select from which match the above criteria, and the user selects desired dataset</li>
-                                        <li id="interactive-annotation-sparql-query-observations" about="#interactive-annotation-sparql-query-observations" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">System sends a SPARQL query to get the observations of the selected dataset for Canada</li>
-                                        <li id="interactive-annotation-create-sparkline" about="#interactive-annotation-create-sparkline" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">A sparkline is created and displayed for the user, also indicating the number of observations it has</li>
-                                        <li id="interactive-annotation-embed-sparkline" about="#interactive-annotation-embed-sparkline" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User submits the sparkline to be included in the text, a hyperlink to the dataset, and a sparkline SVG is inserted back into the sentence replacing <samp>GDP of Canada</samp> with <samp>GDP per capita growth (annual %)</samp></li>
-                                    </ol>
+                                    <dl>
+                                        <dt>Methods</dt>
+                                        <dd>Inline-text annotation using authoring tool</dd>
+                                    </dl>
 
-                                    <p>Figure [<a href="#figure-dokieli-sparkline">2</a>] is a video screencast of this interaction.</p>
+                                    <p>Viewers of this article (at its canonical URL: http://csarven.ca/sparqline-sparql-to-sparkline) in a Web browser can replicate the workflow by enabling the <button class="editor-enable" title="Enable editor"><i class="fa fa-i-cursor"></i>Edit</button> mode from the <button>☰</button> menu and highlighting the text: <samp id="interactive-annotation-example">GDP of Canada</samp>:</p>
 
-                                    <figure id="figure-dokieli-sparkline" rel="schema:hasPart" resource="#figure-dokieli-sparkline">
-                                        <video controls="controls" height="600" id="video-dokieli-sparkline" poster="media/images/GDP-per-capita-growth--annual---.svg" preload="none" rel="schema:hasPart" width="800">
-                                            <source about="#video-dokieli-sparkline" rel="schema:hasPart" resource="https://dokie.li/media/video/dokieli-sparkline.webm" src="https://dokie.li/media/video/dokieli-sparkline.webm" type="video/webm" typeof="fabio:Film">
-                                                <span about="https://dokie.li/media/video/dokieli-sparkline.webm" property="schema:name">Video of sparkline interaction in dokieli</span>
-                                            </source>
-                                        </video>
-                                        <figcaption property="schema:name">Video of sparkline interaction in dokieli</figcaption>
-                                    </figure>
+                                    <dl>
+                                        <dt>Workflow</dt>
+                                        <dd>
+                                            <ol property="schema:hasPart" resource="#interactive-annotation-workflow" typeof="opmw:WorkflowTemplate deo:Model">
+                                                <li id="interactive-annotation-text-entry" about="#interactive-annotation-text-entry" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User enters text in a sentence e.g., <samp>GDP of Canada</samp></li>
+                                                <li id="interactive-annotation-text-selection" about="#interactive-annotation-text-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User selects text <samp>GDP of Canada</samp> with their mouse or keyboard</li>
+                                                <li id="interactive-annotation-toolbar-selection" about="#interactive-annotation-toolbar-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">The authoring toolbar is presented to the user, and user selects the <q>sparkline</q> option</li>
+                                                <li id="interactive-annotation-tokenise-text" about="#interactive-annotation-tokenise-text" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">The input text is split into two: 1) <samp>GDP</samp> and 2) <samp>Canada</samp> segments</li>
+                                                <li id="interactive-annotation-sparql-query-for-input" about="#interactive-annotation-sparql-query-for-input" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">Systems constructs a SPARQL query URL and sends it to the World Bank Linked Dataspace endpoint, looking for a graph pattern where the datasets of labels have <q>GDP</q> in them in which there is at least one observation for the reference area <q>Canada</q></li>
+                                                <li id="interactive-annotation-dataset-selection" about="#interactive-annotation-dataset-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User is is given a list of datasets to select from which match the above criteria, and the user selects desired dataset</li>
+                                                <li id="interactive-annotation-sparql-query-observations" about="#interactive-annotation-sparql-query-observations" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">System sends a SPARQL query to get the observations of the selected dataset for Canada</li>
+                                                <li id="interactive-annotation-create-sparkline" about="#interactive-annotation-create-sparkline" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">A sparkline is created and displayed for the user, also indicating the number of observations it has</li>
+                                                <li id="interactive-annotation-embed-sparkline" about="#interactive-annotation-embed-sparkline" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User submits the sparkline to be included in the text, a hyperlink to the dataset, and a sparkline SVG is inserted back into the sentence replacing <samp>GDP of Canada</samp> with <samp>GDP per capita growth (annual %)</samp></li>
+                                            </ol>
+                                        </dd>
+                                    </dl>
 
-                                    <style type="text/css">/*<![CDATA[*/
-                                        #interactive-annotation .editor-enable,
-                                        #interactive-annotation .editor-disable {
-                                            background-color: #fff;
-                                            border: 0 none;
-                                            font-family: sans-serif;
-                                            font-size: 1em;
-                                            font-weight: normal;
-                                            margin: 0;
-                                            padding: 0;
-                                        }
-                                        #interactive-annotation .editor-enable i,
-                                        #interactive-annotation .editor-disable i {
-                                            margin-right:0.25em;
-                                        }
-                                        #interactive-annotation .editor-disable {
-                                            background-color:#eee;
-                                        }
-                                    /*]]>*/</style>
+                                    <dl>
+                                        <dt>Example</dt>
+                                        <dd>
+                                            <p>Figure [<a href="#figure-dokieli-sparkline">2</a>] is a video screencast of this interaction.</p>
+
+                                            <figure id="figure-dokieli-sparkline" rel="schema:hasPart" resource="#figure-dokieli-sparkline">
+                                                <video controls="controls" height="600" id="video-dokieli-sparkline" poster="media/images/GDP-per-capita-growth--annual---.svg" preload="none" rel="schema:hasPart" width="800">
+                                                    <source about="#video-dokieli-sparkline" rel="schema:hasPart" resource="https://dokie.li/media/video/dokieli-sparkline.webm" src="https://dokie.li/media/video/dokieli-sparkline.webm" type="video/webm" typeof="fabio:Film">
+                                                        <span about="https://dokie.li/media/video/dokieli-sparkline.webm" property="schema:name">Video of sparkline interaction in dokieli</span>
+                                                    </source>
+                                                </video>
+                                                <figcaption property="schema:name">Video of sparkline interaction in dokieli</figcaption>
+                                            </figure>
+
+                                            <style type="text/css">/*<![CDATA[*/
+                                                #interactive-annotation button {
+                                                    line-height:1;
+                                                    font-size:initial;
+                                                    font-family: sans-serif;
+                                                    font-weight: normal;
+                                                }
+                                                #interactive-annotation .editor-enable,
+                                                #interactive-annotation .editor-disable {
+                                                    background-color: #fff;
+                                                    border: 0 none;
+                                                    margin: 0;
+                                                    padding: 0;
+                                                }
+                                                #interactive-annotation .editor-enable i,
+                                                #interactive-annotation .editor-disable i {
+                                                    margin-right:0.25em;
+                                                }
+                                                #interactive-annotation .editor-disable {
+                                                    background-color:#eee;
+                                                }
+                                            /*]]>*/</style>
+                                        </dd>
+                                    </dl>
                                 </div>
                             </section>
                         </div>
