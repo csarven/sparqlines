@@ -233,8 +233,38 @@
                             <section id="dynamic-reference" inlist="" rel="schema:hasPart" resource="#dynamic-reference">
                                 <h3 property="schema:name">Dynamic reference</h3>
                                 <div property="schema:description" datatype="rdf:HTML">
-                                    <p>Use embed/object to call a URL which builds itself and returns an SVG</p>
-                                    <p>Live data. Could also be asynchronously polled / streamed.</p>
+                                    <dl>
+                                        <dt>Description</dt>
+                                        <dd></dd>
+                                    </dl>
+
+                                    <dl>
+                                        <dt>Data Shape</dt>
+                                        <dd>Up to date or near real-time data on article load. Optionally asynchronously polled or subscribed to stream.</dd>
+                                    </dl>
+
+                                    <dl>
+                                        <dt>Methods</dt>
+                                        <dd>Use embed/object to call a URL which builds itself and returns an SVG</dd>
+                                    </dl>
+
+                                    <dl>
+                                        <dt>Workflow</dt>
+                                        <dd>
+                                            <ol property="schema:hasPart" resource="#dyanmic-reference-workflow" typeof="opmw:WorkflowTemplate deo:Model">
+                                                <li id="dyanmic-reference-text-entry" about="#interactive-annotation-text-entry" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#dyanmic-reference-workflow" property="rdfs:label">User selects API endpoint</li>
+                                                <li>User selects dataset</li>
+                                                <li>User selects dimensions</li>
+                                                <li>User confirms sparkline</li>
+                                                <li>System embeds sparkline</li>
+                                            </ol>
+                                        </dd>
+                                    </dl>
+
+                                    <dl>
+                                        <dt>Example</dt>
+                                        <dd>TODO: port http://stats.270a.info/sparkline</dd>
+                                    </dl>
                                 </div>
                             </section>
 
