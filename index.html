@@ -160,21 +160,22 @@
 
                             <p>The earliest known implementation of inline-chart was designed and programmed by Peter Zelchenko and Mike Medved to represent historical charts efficiently in the QuoteTracker software [<a href="http://pete.zelchenko.com/portfolio/screen/2gk.htm"></a>].</p>
 
-                            <p><a href="https://en.wikipedia.org/wiki/Sparkline"><em>Sparkline</em></a> are small line-charts designed to be embedded in text supporting uninterrupted reading <embed class="sparkline" src="media/images/GDP-per-capita-growth--annual---.svg" type="image/svg+xml" /> without referring to a figure disjoint from the original context, e.g., see Figure [<a href="#figure-static-sparkline">1</a>]. They are treated as <em>datawords</em> carrying dense information. <cite><a href="http://www.edwardtufte.com/">Edward Tufte</a></cite> describes sparkline as <q cite="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR"><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR">small intense, simple, word-sized graphic with typographic resolution</a></q> [].</p>
-
-                            <p>...</p>
-                            <p>We have a problem and it requires a solution.. mixing semantic publishing with statistical data and annotations</p>
-                            <p>How is this better/different?</p>
-                            <p>What's the edge?</p>
-                            <p>Why bother doing this?</p>
-                            <p>..</p>
-
-                            <p>Sparkline appear in many places where small datafeeds are useful; programmatical insertion in text-editors and spreadsheets, fitness feeds from watches, social media analytics, streaming real-time quotes, system dashboards and trays, temperature, stocks activity, moodbars, to name a few.</p>
+                            <p id="sparkline-description"><a href="https://en.wikipedia.org/wiki/Sparkline"><em>Sparkline</em></a> are small line-charts designed to be embedded in text supporting continuous reading <embed class="sparkline" src="media/images/GDP-per-capita-growth--annual---.svg" type="image/svg+xml" /> without referring to a figure disjoint from the original context, e.g., see Figure [<a href="#figure-static-sparkline">1</a>]. They are treated as <em>datawords</em> carrying dense information which are suitable for use in places where the available screen real estate can be effectively maximised. <cite><a href="http://www.edwardtufte.com/">Edward Tufte</a></cite> describes sparkline as <q cite="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR"><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR">small intense, simple, word-sized graphic with typographic resolution</a></q> []. Sparklines typically have a variable long dimension and a constrained short dimension. In the case of a typographic line, the constraint is fixed to the line-height of the surrounding text. For example, the computed <code>line-height</code> of this paragraph on the current viewing device is <samp class="line-height">24.6px</samp>, and so the embedded sparkline in this paragraph will have a vertical aspect ratio to that value.</p>
+                            <script>var sd = document.getElementById('sparkline-description'); sd.querySelector('.line-height').innerHTML = sd.ownerDocument.defaultView.getComputedStyle(sd, null)["line-height"];</script>
 
                             <figure id="figure-static-sparkline" rel="schema:hasPart" resource="#figure-static-sparkline">
                                 <object style="min-height:120px !important;" data="media/images/GDP-per-capita-growth--annual---.svg" height="120" rel="schema:image" type="image/svg+xml" width="640"></object>
                                 <figcaption property="schema:name">A typical static figure in an article disjoint from the context that is described</figcaption>
                             </figure>
+
+                            <p>We have a problem and it requires a solution.. mixing semantic publishing with statistical data and annotations</p>
+                            <p>How is this better/different?</p>
+                            <p>What's the edge?</p>
+                            <p>Why bother doing this?</p>
+
+                            <p>Sparkline appear in many places where small datafeeds are useful; programmatical insertion in text-editors and spreadsheets, fitness feeds from watches, social media analytics, streaming real-time quotes, system dashboards and trays, temperature, stocks activity, moodbars, to name a few.</p>
+
+                            <p>In the remainder of this article, we focus on the application of embedding sparklines within article text body. Herein, the data points can be fetched from <a href="http://csarven.ca/statistical-linked-dataspaces">statistical linked dataspaces</a> with SPARQL endpoints to build vector images using the SVG format. We present and discuss common use cases for human authors to include sparklines in their articles, describe possible workflows for each, demonstrate our implementations, and discuss research challenges.</p>
                         </div>
                     </section>
 
@@ -198,7 +199,7 @@
                                 <div property="schema:description" datatype="rdf:HTML">
                                     <dl>
                                         <dt>Description</dt>
-                                        <dd>Human author wants to include a graphic (SVG) in article. Author uses the system to import a pre-built figure to desired location in the article.</dd>
+                                        <dd>Human author for a journal wants to include a graphic (SVG) in their article. Author uses the system to import a pre-built figure to desired location in the article.</dd>
                                     </dl>
 
                                     <dl>
@@ -273,7 +274,7 @@
                                 <div property="schema:description" datatype="rdf:HTML">
                                     <dl>
                                         <dt>Description</dt>
-                                        <dd>The author of an article wishes to include a sparkline by way of annotating a span of text in a paragraph with a publicly accessible statistical dataset on the Web. The author selects a desired matching dataset to their initial inquiry, and includes both a reference to the source dataset and the corresponding sparkline.</dd>
+                                        <dd>Human author for a journal wants to associate a graphic (SVG) in their article by way of annotating a span of text in a paragraph. The authoring tooling uses a publicly accessible system on the Web with statistical datasets. The author selects a desired matching dataset to their initial inquiry, and includes both a reference to the source dataset and the corresponding sparkline.</dd>
                                     </dl>
 
                                     <dl>
@@ -376,6 +377,8 @@
                             <p>Show some evidence that's reasonable.. to persuade the reader to reuse this work for further research.</p>
 
                             <p about="" id="future-work" rel="schema:hasPart" resource="#future-work"><span datatype="rdf:HTML" property="schema:description" resource="#future-work" typeof="deo:FutureWork">Future work..</span></p>
+
+                            <p>Better searching of RDF Data Cubes through SPARQL endpoints, where the human authors input information in natural language or simple data exploration UIs.</p>
                         </div>
                     </section>
 
