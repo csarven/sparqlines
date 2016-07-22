@@ -236,8 +236,6 @@
                                 <thead>
                                     <tr><th></th><th>Use</th><th>Methods</th><th>Example</th></tr>
                                 </thead>
-                                <tfoot>
-                                </tfoot>
                                 <tbody>
                                     <tr>
                                         <th>Static</th>
@@ -248,18 +246,18 @@
                                                 <li>From a datastore and embedded directly</li>
                                             </ul>
                                         </td>
-                                        <th><embed class="sparkline" src="media/images/GDP-per-capita-growth--annual---.svg" height="240" rel="schema:image" type="image/svg+xml" width="640" /></th>
+                                        <td><embed class="sparkline" src="media/images/GDP-per-capita-growth--annual---.svg" height="240" rel="schema:image" type="image/svg+xml" width="640" /></td>
                                     </tr>
                                     <tr>
                                         <th>Dynamic</th>
-                                        <td>Data which is still being gathered of updates, or for which the values may change any time</td>
+                                        <td>Data which may be subject to updates</td>
                                         <td>
                                             <ul>
-                                                <li>Pulls from a datastore and re-fetches on page load or polls in real-time</li>
-                                                <li>embed source as API endpoint which provides the sparkline from URL params</li>
+                                                <li>Re-fetches data on page load or polls in real-time</li>
+                                                <li>Embed source as API endpoint which returns the sparkline</li>
                                             </ul>
                                         </td>
-                                        <th><embed class="sparkline" src="http://stats.270a.info/sparkline.svg?void:sparqlEndpoint=http%3A%2F%2Fworldbank.270a.info%2Fsparql&amp;qb:DataSet=http%3A%2F%2Fworldbank.270a.info%2Fdataset%2FNY.GDP.MKTP.CD&amp;refArea=CA" type="image/svg+xml" /> (reload article in browser)</th>
+                                        <td><embed class="sparkline" src="http://stats.270a.info/sparkline.svg?void:sparqlEndpoint=http%3A%2F%2Fworldbank.270a.info%2Fsparql&amp;qb:DataSet=http%3A%2F%2Fworldbank.270a.info%2Fdataset%2FNY.GDP.MKTP.CD&amp;refArea=CA" type="image/svg+xml" /> (reload article in browser)</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -273,16 +271,16 @@
 
                             <p>A specific example workflow is demonstrated when this article is viewed in a Web browser (at its canonical URL: http://csarven.ca/sparqlines-sparql-to-sparkline). Enable the <button class="editor-enable" title="Enable editor"><i class="fa fa-i-cursor"></i>Edit</button> mode from the <button>☰</button> menu and highlight the text <samp id="interactive-annotation-example">GDP of Canada</samp>. What occurs is as follows:</p>
 
-                            <ol property="schema:hasPart" resource="#interactive-annotation-workflow" typeof="opmw:WorkflowTemplate deo:Model">
-                                <li id="interactive-annotation-text-entry" about="#interactive-annotation-text-entry" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User enters text in a sentence e.g., <samp>GDP of Canada</samp>.</li>
-                                <li id="interactive-annotation-text-selection" about="#interactive-annotation-text-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User selects text <samp>GDP of Canada</samp> with their mouse or keyboard.</li>
-                                <li id="interactive-annotation-toolbar-selection" about="#interactive-annotation-toolbar-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">The authoring toolbar is presented to the user, and user selects the <q>sparkline</q> option.</li>
-                                <li id="interactive-annotation-tokenise-text" about="#interactive-annotation-tokenise-text" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">The input text is split into two: 1) <samp>GDP</samp> and 2) <samp>Canada</samp> segments, whereby the first term is the concept, and the second is a reference area. Reference areas are disambiguated against an internal dictionary.</li>
-                                <li id="interactive-annotation-sparql-query-for-input" about="#interactive-annotation-sparql-query-for-input" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">Systems constructs a SPARQL query URL and sends it to the World Bank Linked Dataspace endpoint, looking for a graph pattern where the datasets of labels have <q>GDP</q> in them in which there is at least one observation for the reference area <q>Canada</q>.</li>
-                                <li id="interactive-annotation-dataset-selection" about="#interactive-annotation-dataset-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User is is given a list of datasets to select from which match the above criteria, and the user selects desired dataset.</li>
-                                <li id="interactive-annotation-sparql-query-observations" about="#interactive-annotation-sparql-query-observations" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">System sends a SPARQL query to get the observations of the selected dataset for Canada.</li>
-                                <li id="interactive-annotation-create-sparkline" about="#interactive-annotation-create-sparkline" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">A sparkline is created and displayed for the user, also indicating the number of observations it has.</li>
-                                <li id="interactive-annotation-embed-sparkline" about="#interactive-annotation-embed-sparkline" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">If the user is happy with this visualisation they include it in the text. A hyperlink to the dataset, and a sparkline SVG is inserted back into the sentence replacing <samp>GDP of Canada</samp> with <samp>GDP per capita growth (annual %)</samp>.</li>
+                            <ol property="schema:hasPart" resource="#embedding-sparqlines-workflow" typeof="opmw:WorkflowTemplate deo:Model">
+                                <li id="interactive-annotation-text-entry" about="#embedding-sparqlines-text-entry" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#embedding-sparqlines-workflow" property="rdfs:label">User enters text in a sentence e.g., <samp>GDP of Canada</samp>.</li>
+                                <li id="interactive-annotation-text-selection" about="#embedding-sparqlines-text-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#embedding-sparqlines-workflow" property="rdfs:label">User selects text <samp>GDP of Canada</samp> with their mouse or keyboard.</li>
+                                <li id="interactive-annotation-toolbar-selection" about="#embedding-sparqlines-toolbar-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#embedding-sparqlines-workflow" property="rdfs:label">The authoring toolbar is presented to the user, and user selects the <q>sparkline</q> option.</li>
+                                <li id="interactive-annotation-tokenise-text" about="#embedding-sparqlines-tokenise-text" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#embedding-sparqlines-workflow" property="rdfs:label">The input text is split into two: 1) <samp>GDP</samp> and 2) <samp>Canada</samp> segments, whereby the first term is the concept, and the second is a reference area. Reference areas are disambiguated against an internal dictionary.</li>
+                                <li id="interactive-annotation-sparql-query-for-input" about="#embedding-sparqlines-sparql-query-for-input" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#embedding-sparqlines-workflow" property="rdfs:label">Systems constructs a SPARQL query URL and sends it to the World Bank Linked Dataspace endpoint, looking for a graph pattern where the datasets of labels have <q>GDP</q> in them in which there is at least one observation for the reference area <q>Canada</q>.</li>
+                                <li id="interactive-annotation-dataset-selection" about="#embedding-sparqlines-dataset-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#embedding-sparqlines-workflow" property="rdfs:label">User is is given a list of datasets to select from which match the above criteria, and the user selects desired dataset.</li>
+                                <li id="interactive-annotation-sparql-query-observations" about="#embedding-sparqlines-sparql-query-observations" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#embedding-sparqlines-workflow" property="rdfs:label">System sends a SPARQL query to get the observations of the selected dataset for Canada.</li>
+                                <li id="interactive-annotation-create-sparkline" about="#embedding-sparqlines-create-sparkline" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#embedding-sparqlines-workflow" property="rdfs:label">A sparkline is created and displayed for the user, also indicating the number of observations it has.</li>
+                                <li id="interactive-annotation-embed-sparkline" about="#embedding-sparqlines-embed-sparkline" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#embedding-sparqlines-workflow" property="rdfs:label">If the user is happy with this visualisation they include it in the text. A hyperlink to the dataset, and a sparkline SVG is inserted back into the sentence replacing <samp>GDP of Canada</samp> with <samp>GDP per capita growth (annual %)</samp>.</li>
                             </ol>
 
                             <p>Figure [<a href="#figure-dokieli-sparkline">2</a>] is a video screencast of this interaction.</p>
@@ -297,24 +295,24 @@
                             </figure>
 
                             <style type="text/css">/*<![CDATA[*/
-                                #interactive-annotation button {
+                                #embedding-sparqlines button {
                                     line-height:1;
                                     font-size:initial;
                                     font-family: sans-serif;
                                     font-weight: normal;
                                 }
-                                #interactive-annotation .editor-enable,
-                                #interactive-annotation .editor-disable {
+                                #embedding-sparqlines .editor-enable,
+                                #embedding-sparqlines .editor-disable {
                                     background-color: #fff;
                                     border: 0 none;
                                     margin: 0;
                                     padding: 0;
                                 }
-                                #interactive-annotation .editor-enable i,
-                                #interactive-annotation .editor-disable i {
+                                #embedding-sparqlines .editor-enable i,
+                                #embedding-sparqlines .editor-disable i {
                                     margin-right:0.25em;
                                 }
-                                #interactive-annotation .editor-disable {
+                                #embedding-sparqlines .editor-disable {
                                     background-color:#eee;
                                 }
                             /*]]>*/</style>
@@ -328,7 +326,7 @@
 
                             <ul>
                                 <li>The part of the document to which the sparqline belongs (<code>rel="schema:hasPart"</code>).</li>
-                                <li>The human-readable name for the figure (based on the dataset used), where it was derived from (the <code>qb:DataSet</code> instance), and the generated graphic (in SVG).</li>
+                                <li>The human-readable name for the figure (based on the dataset used), where it was derived from (the <code>qb:DataSet</code> instance), and the generated SVG.</li>
                                 <li>The SVG resource has statements to indicate:
                                     <ul>
                                         <li>linked statistical dataset which was used (<code>rel="prov:wasDerivedFrom"</code>).</li>
@@ -343,27 +341,18 @@
                         </div>
                     </section>
 
-                    <section id="discussion" inlist="" rel="schema:hasPart" resource="#discussion">
-                        <h2 property="schema:name">Discussion</h2>
-                        <div datatype="rdf:HTML" property="schema:description" resource="#discussion" typeof="deo:Discussion">
-                            <p>The problem space that requires a solution is the generalisation of data cube exploration through light-weight user-friendly interfaces, as well as the integration of interactive sparklines.</p>
+                    <section id="discussion-and-conclusions" inlist="" rel="schema:hasPart" resource="#discussion-and-conclusions">
+                        <h2 property="schema:name">Discussion and Conclusions</h2>
+                        <div datatype="rdf:HTML" property="schema:description" resource="#discussion-and-conclusions" typeof="deo:Discussion">
+                            <p>We have presented an implementation of sparklines generated from SPARQL endpoints and embedded directly through authoring tool. This allows to visualise their data in an optimal way without breaking their workflow. However, there is a lot of scope for future work in this area. We now discuss some areas for further development.</p>
 
-                            <p>Disambiguating author's input in natural language with URIs at the endpoint.</p>
+                            <p><strong>Design principles</strong>: Tufte makes recommendations on readability, as well as applying Cleveland's analytical method of choosing aspect ratios <em>banking to 45°</em> [][]. Cleveland's method has been extended to generate banked sparklines by providing the vertical dimension to fit a typographical line. These approaches are intended to help maximize the clarity of the line segments []. Applying the banking to 45° method is a future implementation in dokieli (<a href="https://github.com/linkeddata/dokieli/issues/159">issue 159</a>.</p>
 
-                            <p><strong>Design principles</strong>: Tufte makes recommendations on readability, as well as applying Cleveland's analytical method of choosing aspect ratios <em>banking to 45°</em> [][]. Cleveland's method has been extended to generate banked sparklines by providing the vertical dimension to fit a typographical line. These approaches are intended to help maximize the clarity of the line segments [].</p>
+                            <p><strong>Dataset interaction</strong>: Through faceted searching and browsing authors can explore suitable datasets with a combination of searching using natural-language and filtering through available datasets and dimensions of interest. This approach is convenient for datasets in RDF Data Cubes since they are highly structured and classified. Further work is needed to improve the process for disambiguation of the author's input in natural language in order to discover appropriate URIs in the dataset.</p>
 
-                            <p><strong>Security and privacy considerations</strong>:</p>
+                            <p><strong>Privacy considerations</strong>: Many researchers collect experimental data which has identifiable information for the participants. This information should not be exposed through public SPARQL endpoints. Measures such as access control lists to allow researchers to generate sparqlines over sensitive data.</p>
 
-                            <p>Faceted selection</p>
-                        </div>
-                    </section>
-
-                    <section id="conclusions" inlist="" rel="schema:hasPart" resource="#conclusions">
-                        <h2 property="schema:name">Conclusions</h2>
-                        <div datatype="rdf:HTML" property="schema:description" resource="#conclusions" typeof="deo:Conclusion">
-                            <p>Benefits? We found a solution that is robust? efficient? working? flexible? accessible? evolvable?</p>
-
-                            <p>Show some evidence that's reasonable.. to persuade the reader to reuse this work for further research.</p>
+                            <p><strong>Data availability</strong>: SPARQL endpoints are notoriously unreliable in the Linked Open Data cloud, and they may have high setup costs for new datasets. Applications which rely on endpoints to generate sparqlines with dynamic data, may want to initially include a local cached copy from the last access point in the article. The application can then asynchronously fetch or subscribe for new updates.</p>
                         </div>
                     </section>
 
