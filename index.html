@@ -54,7 +54,7 @@
 
                 <dl id="document-modified">
                     <dt>Modified</dt>
-                    <dd><time datatype="xsd:dateTime" datetime="2016-07-21T00:00:00Z" property="schema:dateModified">2016-07-21</time></dd>
+                    <dd><time datatype="xsd:dateTime" datetime="2016-07-21T00:00:00Z" property="schema:dateModified">2016-07-22</time></dd>
                 </dl>
 
                 <dl id="document-in-reply-to">
@@ -71,7 +71,7 @@
                     <section id="abstract">
                         <h2>Abstract</h2>
                         <div datatype="rdf:HTML" property="schema:abstract">
-                            <p>This article presents <em>sparqlines</em>; procedure and interfaces to embed statistical observations fetched from SPARQL endpoints and displayed as inline-charts. An inline-chart, also known as a <a href="https://en.wikipedia.org/wiki/Sparkline"><em>sparkline</em></a> is concise, and located where they are discussed in the text. They are treated as <em>datawords</em> carrying dense information with the resolution of typography. <cite><a href="http://www.edwardtufte.com/">Edward Tufte</a></cite> describes sparkline as <q cite="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR"><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR">small intense, simple, word-sized graphic with typographic resolution</a></q>. For example, the 
+                            <p>This article presents <em>sparqlines</em>: statistical observations fetched from SPARQL endpoints and displayed as inline-charts. An inline-chart, also known as a <a href="https://en.wikipedia.org/wiki/Sparkline"><em>sparkline</em></a>, is concise, and located where it is discussed in the text, complimenting the supporting text without breaking the readers flow. For example, the 
                                     <span rel="schema:hasPart" resource="#figure-GDP-per-capita-growth--annual---">
                                         <a href="http://worldbank.270a.info/dataset/NY.GDP.PCAP.KD.ZG" property="schema:name" rel="prov:wasDerivedFrom" resource="http://worldbank.270a.info/dataset/NY.GDP.PCAP.KD.ZG" typeof="qb:DataSet">GDP per capita growth (annual %)</a> [Canada]
                                         <span class="sparkline" rel="schema:image" resource="#GDP-per-capita-growth--annual---">
@@ -136,7 +136,8 @@
                                                 </g>
                                             </svg>
                                         </span>
-                                    </span> claimed by the <a href="http://worldbank.270a.info/">World Bank Linked Dataspace</a>. This brief demonstration of Linked Statistical Data Sparkline, 1) compliments the supporting text without breaking the reader’s flow, and 2) provides an opportunity for the reader to investigate further by clicking on the data-line to access the source. This article is created with dokieli includes sparkline use-cases and is interactive; <a href="http://csarven.ca/sparqlines-sparql-to-sparkline">http://csarven.ca/sparqlines-sparql-to-sparkline</a>.</p>
+                                    </span> claimed by the <a href="http://worldbank.270a.info/">World Bank Linked Dataspace</a>.
+                            We demonstrate an implementation which allows scientists or authors to easily enhance their work with sparklines generated from their own or public statistical linked datasets. This article includes an active demonstration accessible at <a href="http://csarven.ca/sparqlines-sparql-to-sparkline">http://csarven.ca/sparqlines-sparql-to-sparkline</a>.</p>
                         </div>
                     </section>
 
@@ -158,20 +159,6 @@
                         <div datatype="rdf:HTML" property="schema:description">
                             <p>In this article we introduce <em>sparqlines</em>, an integration of statistical data retrieval using SPARQL and displaying the observations in the form of word-size graphics; sparkline.</p>
 
-                            <p>The earliest known implementation of inline-chart was designed and programmed by Peter Zelchenko and Mike Medved to represent historical charts efficiently in the QuoteTracker software [<a href="http://pete.zelchenko.com/portfolio/screen/2gk.htm"></a>].</p>
-
-                            <p id="sparkline-description"><a href="https://en.wikipedia.org/wiki/Sparkline">Sparklines</a> are small line-charts designed to be included anywhere, for example embedded in a sentence, table, or map, with relevant context. When embedded in a sentence, they support the text allowing continuous reading <embed class="sparkline" src="media/images/GDP-per-capita-growth--annual---.svg" type="image/svg+xml" /> without the need to refer to a figure disjoint from the original context, e.g., see Figure [<a href="#figure-static-sparkline">1</a>]. They are treated as <em>datawords</em> carrying dense information which are suitable for use in places where the available screen real estate can be effectively maximised. <cite><a href="http://www.edwardtufte.com/">Edward Tufte</a></cite> describes sparkline as <q cite="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR"><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch, uninteruptted-msg?msg_id=0001OR">small intense, simple, word-sized graphic with typographic resolution</a></q> []. Sparkline graphics typically have a variable long dimension and a constrained short dimension. In the case of a typographic line, the constraint can be fixed to the height of the font-size of the encapsulating component. For example, the computed CSS <code>height</code> value of the <code>embed</code> HTML element that contains the sparkline on the current viewing device is <samp class="height">20px</samp>, and so the embedded sparkline in this paragraph will have a vertical aspect ratio to that value.</p>
-                            <script>document.addEventListener('DOMContentLoaded', function(){var s = document.querySelector('#sparkline-description .sparkline'); document.querySelector('#sparkline-description .height').innerHTML = s.ownerDocument.defaultView.getComputedStyle(s, null)["height"];});</script>
-
-                            <figure id="figure-static-sparkline" rel="schema:hasPart" resource="#figure-static-sparkline">
-                                <object style="min-height:120px !important;" data="media/images/GDP-per-capita-growth--annual---.svg" height="120" rel="schema:image" type="image/svg+xml" width="640"></object>
-                                <figcaption property="schema:name">A typical static figure in an article disjoint from the context that is described</figcaption>
-                            </figure>
-
-                            <p>Statistical data that is modelled with the RDF Data Cube vocabulary makes it possible to discover and identify artefacts in a uniform way. This is in contrast to writing applications to consume data from endpoints with heterogeneous data models. For front-end Web applications, data can be fetched, explored, and filtered through via statistical linked dataspaces with SPARQL endpoints, e.g., <a href="http://270a.info/">http://270a.info/</a>. Utilising this method of access from within various types of articles on the Web, makes it possible to build applications which put more focus on user-interfaces - the heavy lifting - in comparison to handling different data models case by case, or superfluous data integration tasks. Furthermore, having easy access to highly structured multidimensional data - essentially through an <code>HTTP GET</code> request - makes it desirable to conceive static and real-time visualisations. Important use case to bare in mind is our the ability to mix semantic publishing methods with integration of statistical data and annotations.</p>
-
-                            <p>Sparkline appear in many places where small datafeeds are useful; programmatical insertion in text-editors and spreadsheets, fitness feeds from wearable watches, social media analytics, streaming real-time quotes, system dashboards and trays, temperature and stock activity, to name a few.</p>
-
                             <p>In the remainder of this article, we focus on the application of embedding sparklines within article text body. Herein, the data points can be fetched from <a href="http://csarven.ca/statistical-linked-dataspaces">statistical linked dataspaces</a> with SPARQL endpoints to build vector images using the SVG format. We present and discuss common use cases for human authors to include sparklines in their articles, describe possible workflows for each, demonstrate our implementations, and discuss research challenges.</p>
                         </div>
                     </section>
@@ -179,19 +166,77 @@
                     <section id="related-work" inlist="" rel="schema:hasPart" resource="#related-work">
                         <h2 property="schema:name">Related Work</h2>
                         <div datatype="rdf:HTML" property="schema:description" resource="#related-work" typeof="deo:RelatedWork">
-                            <p>What's out there?</p>
-                            <p>http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR&amp;topic_id=1</p>
-                            <p>Google Docs / Sparkline</p>
-                            <p>What's in their scope?</p>
+                            <section id="sparklines" inlist="" rel="schema:hasPart" resource="#sparklines">
+                                <h3 property="schema:name">Sparklines</h3>
+                                <div datatype="rdf:HTML" property="schema:description">
+                                    <p>The earliest known implementation of inline-chart was designed and programmed by Peter Zelchenko and Mike Medved to represent historical charts efficiently in the QuoteTracker software [<a href="http://pete.zelchenko.com/portfolio/screen/2gk.htm"></a>].</p>
+
+                                    <p>They are treated as <em>datawords</em> carrying dense information with the resolution of typography. <cite><a href="http://www.edwardtufte.com/">Edward Tufte</a></cite> describes sparkline as <q cite="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR"><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR">small intense, simple, word-sized graphic with typographic resolution</a></q>.  This brief demonstration of Linked Statistical Data Sparkline, 1) compliments the supporting text without breaking the reader’s flow, and 2) provides an opportunity for the reader to glance and then to investigate further by clicking on the data-line to access the source.</p>
+
+                                    <p id="sparkline-description"><a href="https://en.wikipedia.org/wiki/Sparkline">Sparklines</a> are small line-charts designed to be included anywhere, for example embedded in a sentence, table, or map, with relevant context. When embedded in a sentence, they support the text allowing continuous reading <embed class="sparkline" src="media/images/GDP-per-capita-growth--annual---.svg" type="image/svg+xml" /> without the need to refer to a figure disjoint from the original context, e.g., see Figure [<a href="#figure-static-sparkline">1</a>]. They are treated as <em>datawords</em> carrying dense information which are suitable for use in places where the available screen real estate can be effectively maximised. <cite><a href="http://www.edwardtufte.com/">Edward Tufte</a></cite> describes sparkline as <q cite="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR"><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch, uninteruptted-msg?msg_id=0001OR">small intense, simple, word-sized graphic with typographic resolution</a></q> []. Sparkline graphics typically have a variable long dimension and a constrained short dimension. In the case of a typographic line, the constraint can be fixed to the height of the font-size of the encapsulating component. For example, the computed CSS <code>height</code> value of the <code>embed</code> HTML element that contains the sparkline on the current viewing device is <samp class="height">20px</samp>, and so the embedded sparkline in this paragraph will have a vertical aspect ratio to that value.</p>
+                                    <script>document.addEventListener('DOMContentLoaded', function(){var s = document.querySelector('#sparkline-description .sparkline'); document.querySelector('#sparkline-description .height').innerHTML = s.ownerDocument.defaultView.getComputedStyle(s, null)["height"];});</script>
+
+                                    <figure id="figure-static-sparkline" rel="schema:hasPart" resource="#figure-static-sparkline">
+                                        <object style="min-height:120px !important;" data="media/images/GDP-per-capita-growth--annual---.svg" height="120" rel="schema:image" type="image/svg+xml" width="640"></object>
+                                        <figcaption property="schema:name">A typical static figure in an article disjoint from the context that is described</figcaption>
+                                    </figure>
+
+                                    <p>Sparkline appear in many places where small datafeeds are useful; programmatical insertion in text-editors and spreadsheets, fitness feeds from wearable watches, social media analytics, streaming real-time quotes, system dashboards and trays, temperature and stock activity, to name a few.</p>
+
+                                    <p>Pick some examples listed at http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR&amp;topic_id=1</p>
+                                    <p>Mention Google Docs / Sparkline for sure.</p>
+                                    <p>Briefly - What's in their scope?</p>
+
+                                    <p><span class="ref" typeof="dctypes:Text" resource="#r-37f076" rel="schema:hasPart"><mark id="r-37f076" property="oa:text" datatype="rdf:HTML">Studies show that novice and experienced investors using stock report with Sparklines will experience reduced cognitive load</mark><span class="ref-reference">[<a href="#37f076">37f076</a>]</span></span></p>
+                                </div>
+                            </section>
+
+                            <section id="rdfa-data-cube-and-sparql" inlist="" rel="schema:hasPart" resource="#rdfa-data-cube-and-sparql">
+                                <h3 property="schema:name">RDF Data Cube and SPARQL</h3>
+                                <div datatype="rdf:HTML" property="schema:description">
+                                    <p>Statistical data that is modelled with the RDF Data Cube vocabulary makes it possible to discover and identify artefacts in a uniform way. This is in contrast to writing applications to consume data from endpoints with heterogeneous data models. For front-end Web applications, data can be fetched, explored, and filtered through via statistical linked dataspaces with SPARQL endpoints, e.g., <a href="http://270a.info/">http://270a.info/</a>. Utilising this method of access from within various types of articles on the Web, makes it possible to build applications which put more focus on user-interfaces - the heavy lifting - in comparison to handling different data models case by case, or superfluous data integration tasks. Furthermore, having easy access to highly structured multidimensional data - essentially through an <code>HTTP GET</code> request - makes it desirable to conceive static and real-time visualisations. Important use case to bare in mind is our the ability to mix semantic publishing with the integration of statistical data and annotations.</p>
+
+                                    <p>Example: Linked Statistical Data Analysis</p>
+                                </div>
+                            </section>
                         </div>
                     </section>
 
-                    <section id="use-cases" inlist="" rel="schema:hasPart" resource="#use-cases">
-                        <h2 property="schema:name">Use cases</h2>
+                    <section id="data-provision" inlist="" rel="schema:hasPart" resource="#data-provision">
+                        <h2 property="schema:name">Data Provision</h2>
                         <div datatype="rdf:HTML" property="schema:description">
-                            <p>In this section we describe the system requirements for each use case with a description and then specify the corresponding data shape. We then provide possible methods for this implementation, a workflow for an implementation, and then demonstrate within this article.</p>
+                            <p><strong>Data cube</strong>: exploration/filtering, dimensions, slices</p>
+                            <p><strong>SPARQL queries</strong>: constructing query URLs, cachable?</p>
+                        </div>
+                    </section>
 
-                            <section id="static-reference" inlist="" rel="schema:hasPart" resource="#static--reference">
+                    <section id="static-and-dynamic-sparqlines" inlist="" rel="schema:hasPart" resource="#static-and-dynamic-sparqlines">
+                        <h2 property="schema:name">Static and Dynamic Sparqlines</h2>
+                        <div datatype="rdf:HTML" property="schema:description">
+                            <p>The data behind a sparqline can be static: a fixed historical set to which no new points are added; or dynamic: subject to change as new data is gathered. Both of these cases are accommodated by our implementation.</p>
+
+                            <table>
+                                <caption>Static and Dynamic Sparklines</caption>
+                                <thead>
+                                    <tr><th>Data Type</th><th>Description</th><th>Data Shape</th></tr>
+                                </thead>
+                                <tfoot>
+                                </tfoot>
+                                <tbody>
+                                    <tr>
+                                        <th>Static</th>
+                                        <td>Human author for a journal wants to include a graphic (SVG) in their article. Author uses the system to import a pre-built figure to desired location in the article</td>
+                                        <td>Static data. Suitable for displaying historical data</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Dynamic</th>
+                                        <td></td>
+                                        <td>Up to date or near real-time data on article load. Optionally asynchronously polled or subscribed to stream. Updates may come any time.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <section id="static-reference" inlist="" rel="schema:hasPart" resource="#static-reference">
                                 <h3 property="schema:name">Static reference</h3>
                                 <div property="schema:description" datatype="rdf:HTML">
                                     <dl>
@@ -238,7 +283,7 @@
 
                                     <dl>
                                         <dt>Data Shape</dt>
-                                        <dd>Up to date or near real-time data on article load. Optionally asynchronously polled or subscribed to stream.</dd>
+                                        <dd>Up to date or near real-time data on article load. Optionally asynchronously polled or subscribed to stream. Updates may come any time.</dd>
                                     </dl>
 
                                     <dl>
@@ -265,6 +310,13 @@
                                     </dl>
                                 </div>
                             </section>
+                        </div>
+                    </section>
+
+                    <section id="embedding-sparqlines" inlist="" rel="schema:hasPart" resource="embedding-sparqlines">
+                        <h2 property="schema:name">Embedding Sparqlines</h2>
+                        <div datatype="rdf:HTML" property="schema:description">
+                           <p><strong>Text to URL</strong>: disambiguation; user input to closest matching URL</p>
 
                             <section id="interactive-annotation" inlist="" rel="schema:hasPart" resource="#interactive-annotation">
                                 <h3 property="schema:name">Interactive Annotation</h3>
@@ -272,11 +324,6 @@
                                     <dl>
                                         <dt>Description</dt>
                                         <dd>Human author for a journal wants to associate a graphic (SVG) in their article by way of annotating a span of text in a paragraph. The authoring tooling uses a publicly accessible system on the Web with statistical datasets. The author selects a desired matching dataset to their initial inquiry, and includes both a reference to the source dataset and the corresponding sparkline.</dd>
-                                    </dl>
-
-                                    <dl>
-                                        <dt>Data Shape</dt>
-                                        <dd>Static data. Suitable for displaying historical data</dd>
                                     </dl>
 
                                     <dl>
@@ -343,41 +390,52 @@
                                     </dl>
                                 </div>
                             </section>
+
+                            <section id="api-reference" inlist="" rel="schema:hasPart" resource="api-reference">
+                                <h3 property="schema:name">API reference</h3>
+                                <div datatype="rdf:HTML" property="schema:description">
+                                    <p><embed class="sparkline" src="http://stats.270a.info/sparkline.svg?void:sparqlEndpoint=http%3A%2F%2Fworldbank.270a.info%2Fsparql&amp;qb:DataSet=http%3A%2F%2Fworldbank.270a.info%2Fdataset%2FNY.GDP.MKTP.CD&amp;refArea=CA" type="image/svg+xml" /></p>
+                                </div>
+                            </section>
                         </div>
                     </section>
 
-                    <section id="design-and-architecture" inlist="" rel="schema:hasPart" resource="#design-and-architecture">
-                        <h2 property="schema:name">Design and Architecture</h2>
+                    <section id="semantic-publishing">
+                        <h2 property="schema:name">Semantic Publishing</h2>
                         <div datatype="rdf:HTML" property="schema:description">
-                            <p><strong>User interaction</strong>:</p>
-                            <p><strong>Text to URL</strong>: disambiguation; user input to closest matching URL</p>
-                            <p><strong>Data cube</strong>: dimensions, slices</p>
-                            <p><strong>SPARQL queries</strong>: constructing query URLs, cachable?</p>
-                            <p><strong>Design principles</strong>: readability, banking to 45°, SVG</p>
-                            <p><strong>Media embedding</strong>:</p>
-                            <p><strong>Semantic publishing</strong>:</p>
+                            <p><strong>Semantic publishing</strong>: RDFa relations from the article to the SVG, RDFa in SVG (license, URLs to source)</p>
                         </div>
                     </section>
 
+<!--
                     <section id="user-study" inlist="" rel="schema:hasPart" resource="#user-study">
                         <h2 property="schema:name">User study</h2>
                         <div datatype="rdf:HTML" property="schema:description">
                         </div>
                     </section>
+-->
 
-                    <section id="conclusions" inlist="" rel="schema:hasPart" resource="#conclusions">
+                     <section id="discussion" inlist="" rel="schema:hasPart" resource="#discussion">
+                        <h2 property="schema:name">Discussion</h2>
+                        <div datatype="rdf:HTML" property="schema:description" resource="#discussion" typeof="deo:Discussion">
+                            <p>The problem space that requires a solution is the generalisation of data cube exploration through light-weight user-friendly interfaces, as well as the integration of interactive sparklines.</p>
+
+                            <p>Disambiguating author's input in natural language with URIs at the endpoint.</p>
+
+                            <p><strong>Design principles</strong>: readability, banking to 45°, SVG</p>
+
+                            <p><strong>Security and privacy considerations</strong>:</p>
+
+                            <p>Faceted selection</p>
+                        </div>
+                    </section>
+
+                     <section id="conclusions" inlist="" rel="schema:hasPart" resource="#conclusions">
                         <h2 property="schema:name">Conclusions</h2>
                         <div datatype="rdf:HTML" property="schema:description" resource="#conclusions" typeof="deo:Conclusion">
-                            <p>In this article, ...</p>
-                            <p>We found a solution that is robust? efficient? working? flexible? accessible? evolvable?</p>
-                            <p>The benefits are.. Prove?</p>
+                            <p>Benefits? We found a solution that is robust? efficient? working? flexible? accessible? evolvable?</p>
+
                             <p>Show some evidence that's reasonable.. to persuade the reader to reuse this work for further research.</p>
-
-                            <p about="" id="future-work" rel="schema:hasPart" resource="#future-work"><span datatype="rdf:HTML" property="schema:description" resource="#future-work" typeof="deo:FutureWork">Future work..</span></p>
-
-                            <p>The problem that requires a solution is the generalisation of data cube exploration through human-friendly user interfaces and integration of visualisations with semantic annotations in context of where they occur in scholarly articles.</p>
-
-                            <p>Better searching of RDF Data Cubes through SPARQL endpoints, where the human authors input information in natural language or simple data exploration UIs.</p>
                         </div>
                     </section>
 
@@ -391,6 +449,9 @@
                     <section id="references">
                         <h2>References</h2>
                         <div>
+                            <ol>
+                                <li id="37f076">P. Meharia: Use of Visualization in Digital Financial Reporting: The effect of Sparkline (2012). Theses and Dissertations--Business Administration. <a href="http://uknowledge.uky.edu/busadmin_etds/1/">Paper 1</a>, <a href="http://uknowledge.uky.edu/cgi/viewcontent.cgi?article=1000&amp;context=busadmin_etds" rel="schema:citation">http://uknowledge.uky.edu/cgi/viewcontent.cgi?article=1000&amp;context=busadmin_etds</a></li>
+                            </ol>
                         </div>
                     </section>
                 </div>
