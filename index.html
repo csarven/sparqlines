@@ -17,7 +17,7 @@
         <script src="https://dokie.li/scripts/do.js"></script>
     </head>
 
-    <body about="" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# dcterms: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/ v: http://www.w3.org/2006/vcard/ns# pimspace: http://www.w3.org/ns/pim/space# cc: http://creativecommons.org/ns# skos: http://www.w3.org/2004/02/skos/core# prov: http://www.w3.org/ns/prov# schema: https://schema.org/ rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# cal: http://www.w3.org/2002/12/cal/ical# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# org: http://www.w3.org/ns/org# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ oa: http://www.w3.org/ns/oa# solid: http://www.w3.org/ns/solid/terms#" typeof="schema:CreativeWork sioc:Post prov:Entity">
+    <body about="" prefix="rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns# rdfs: http://www.w3.org/2000/01/rdf-schema# owl: http://www.w3.org/2002/07/owl# xsd: http://www.w3.org/2001/XMLSchema# dcterms: http://purl.org/dc/terms/ foaf: http://xmlns.com/foaf/0.1/ v: http://www.w3.org/2006/vcard/ns# pimspace: http://www.w3.org/ns/pim/space# cc: http://creativecommons.org/ns# skos: http://www.w3.org/2004/02/skos/core# prov: http://www.w3.org/ns/prov# qb: http://purl.org/linked-data/cube# schema: https://schema.org/ rsa: http://www.w3.org/ns/auth/rsa# cert: http://www.w3.org/ns/auth/cert# cal: http://www.w3.org/2002/12/cal/ical# wgs: http://www.w3.org/2003/01/geo/wgs84_pos# org: http://www.w3.org/ns/org# biblio: http://purl.org/net/biblio# bibo: http://purl.org/ontology/bibo/ book: http://purl.org/NET/book/vocab# ov: http://open.vocab.org/terms/ doap: http://usefulinc.com/ns/doap# dbr: http://dbpedia.org/resource/ dbp: http://dbpedia.org/property/ sio: http://semanticscience.org/resource/ opmw: http://www.opmw.org/ontology/ deo: http://purl.org/spar/deo/ doco: http://purl.org/spar/doco/ cito: http://purl.org/spar/cito/ fabio: http://purl.org/spar/fabio/ oa: http://www.w3.org/ns/oa# solid: http://www.w3.org/ns/solid/terms#" typeof="schema:CreativeWork sioc:Post prov:Entity">
         <main>
             <article about="" typeof="schema:Article">
                 <h1 property="schema:name">Sparqlines: SPARQL to Sparkline</h1>
@@ -158,9 +158,11 @@
                     <section id="introduction" inlist="" rel="schema:hasPart" resource="#introduction">
                         <h2 property="schema:name">Introduction</h2>
                         <div datatype="rdf:HTML" property="schema:description">
-                            <p>In this article we introduce <em>sparqlines</em>, an integration of statistical data retrieval using SPARQL and displaying the observations in the form of word-size graphics; sparkline.</p>
+                            <p>In this article we introduce <em>sparqlines</em>, an integration of statistical data retrieval using SPARQL with displaying observations in the form of word-size graphics; sparklines. We describe an implementation which is part of Web based authoring tool (<a href="https://dokie.li/">dokieli</a>). We cover how the data is modelled and exposed in order to be suitable for embedding; demonstrate how to embed data as both static and dynamic sparklines and discuss the technical requirements of each; and walk through the user interactions to do so.</p>
 
-                            <p>In the remainder of this article, we focus on the application of embedding sparklines within article text body. Herein, the data points can be fetched from <a href="http://csarven.ca/statistical-linked-dataspaces">statistical linked dataspaces</a> with SPARQL endpoints to build vector images using the SVG format. We present and discuss common use cases for human authors to include sparklines in their articles, describe possible workflows for each, demonstrate our implementations, and discuss research challenges.</p>
+                            <p>Our contribution is the generation of a well-established visual aid to reading statistical data (the sparkline) directly from the dataset itself, at the time of authoring the supporting text, i.e., as part of the writing workflow. This enables authors who are already publishing open data to use it directly, as well as encouraging them to make their data available for others to use, and offers an easy way to present the reader with a way to better understand the information.</p>
+
+                            <p>We conclude with a discussion of the implications of this work, including design considerations and potential privacy issues. The code of our implementation is open source, and we invite you to try it out and make requests for more advanced features.</p>
                         </div>
                     </section>
 
@@ -170,21 +172,21 @@
                             <section id="sparklines" inlist="" rel="schema:hasPart" resource="#sparklines">
                                 <h3 property="schema:name">Sparklines</h3>
                                 <div datatype="rdf:HTML" property="schema:description">
-                                    <p>The earliest known implementation of inline-chart was designed and programmed by Peter Zelchenko and Mike Medved to represent historical charts efficiently in the QuoteTracker software in early 1999 [<a href="http://pete.zelchenko.com/portfolio/screen/2gk.htm"></a>].</p>
+                                    <p id="sparkline-description">The earliest known implementation of an inline-chart was designed and programmed by Peter Zelchenko and Mike Medved to represent historical charts efficiently in the QuoteTracker software in early 1999 [<a href="http://pete.zelchenko.com/portfolio/screen/2gk.htm"></a>]. They are "datawords", carrying dense information with the resolution of typography, particularly useful in places where the available screen real estate is minimal. <a href="http://www.edwardtufte.com/">Edward Tufte</a> describes sparkline as <q cite="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR"><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch, uninteruptted-msg?msg_id=0001OR">small intense, simple, word-sized graphic with typographic resolution</a></q> []. They are designed to be included anywhere, for example embedded in a sentence, table or even a map, within the relevant context. When embedded in a sentence, they support the text, allowing continuous reading <embed class="sparkline" src="media/images/GDP-per-capita-growth--annual---.svg" type="image/svg+xml" /> without the need to refer to a figure disjoint from the original context, whilst still providing an opportunity for the reader to investigate further by clicking on the data line to access each point of source, per <a href="#figure-static-sparkline">Figure 1</a>.</p>
 
-                                    <p id="sparkline-description"><a href="https://en.wikipedia.org/wiki/Sparkline">Sparklines</a> are small line-charts designed to be included anywhere, for example embedded in a sentence, table, or map, with relevant context. When embedded in a sentence, they support the text allowing continuous reading without breaking the reader's flow <embed class="sparkline" src="media/images/GDP-per-capita-growth--annual---.svg" type="image/svg+xml" />, and can provide an opportunity for the reader to investigate further by clicking on the data-line to access each point of source. This is appropriate for use without the need to refer to a figure disjoint from the original context, e.g., see Figure [<a href="#figure-static-sparkline">1</a>]. They are treated as <em>datawords</em> carrying dense information which are suitable for use in places where the available screen real estate can be effectively maximised. <cite><a href="http://www.edwardtufte.com/">Edward Tufte</a></cite> describes sparkline as <q cite="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR"><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch, uninteruptted-msg?msg_id=0001OR">small intense, simple, word-sized graphic with typographic resolution</a></q> []. Sparkline graphics typically have a variable long dimension and a constrained short dimension. In the case of a typographic line, the constraint can be fixed to the height of the font-size of the encapsulating component. For example, the computed CSS <code>height</code> value of the <code>embed</code> HTML element that contains the sparkline on the current viewing device is <samp class="height">20px</samp>, and so the embedded sparkline in this paragraph will have a vertical aspect ratio to that value.</p>
+                                    <p id="sparkline-graphics">Sparkline graphics typically have a variable long dimension and a constrained short dimension. In the case of a typographic line, the constraint can be fixed to the height of the font-size of the encapsulating component. For example, the computed CSS <code>height</code> value of the <code>embed</code> HTML element that contains the sparkline on the current viewing device is <samp class="height">20px</samp>, and so the embedded sparkline in this paragraph will have a vertical aspect ratio of that value.</p>
                                     <script>document.addEventListener('DOMContentLoaded', function(){var s = document.querySelector('#sparkline-description .sparkline'); document.querySelector('#sparkline-description .height').innerHTML = s.ownerDocument.defaultView.getComputedStyle(s, null)["height"];});</script>
 
                                     <figure id="figure-static-sparkline" rel="schema:hasPart" resource="#figure-static-sparkline">
                                         <object style="min-height:120px !important;" data="media/images/GDP-per-capita-growth--annual---.svg" height="120" rel="schema:image" type="image/svg+xml" width="640"></object>
-                                        <figcaption property="schema:name">A typical static figure in an article disjoint from the context that is described</figcaption>
+                                        <figcaption property="schema:name">A typical static figure in an article disjoint from the context in which it is described</figcaption>
                                     </figure>
 
                                     <p>Sparkline appear in many places where small datafeeds are useful; programmatical insertion in text-editors and spreadsheets, fitness feeds from wearable watches, social media analytics, streaming real-time quotes, system dashboards and trays, temperature and stock activity, to name a few.</p>
 
                                     <p>Sparklines in line, bar, column, win/loss graphs can be programatically included in Google Drive by either including data from an embedded table [<a href="https://support.google.com/docs/answer/3093289?hl=en"></a>]</p>
 
-                                    <p>The Wayback Machine uses sparklines to show an application of the snapshots of a URL (<a href="https://web.archive.org/web/*/http://csarven.ca/">http://csarven.ca/</a>) through time (2004+): <img style="display:block" src="https://web.archive.org/web/jsp/graph.jsp?nomonth=1&graphdata=1029_75_1996:-1:000000000000_2004:-1:010000000430_2005:-1:122430033004_2006:-1:193656640155_2007:-1:634212110911_2008:-1:111111164102_2009:-1:111100000000_2010:-1:101111112322_2011:-1:122221241511_2012:-1:232130203201_2013:-1:5015212111cf_2014:-1:e20112312222_2015:-1:135221123011_2016:3:225300000000" /></p>
+                                    <p>The Wayback Machine uses sparklines to show an application of the snapshots of a URL (<a href="https://web.archive.org/web/*/http://csarven.ca/">http://csarven.ca/</a>) through time (2004+): <img style="display:block" src="https://web.archive.org/web/jsp/graph.jsp?nomonth=1&amp;graphdata=1029_75_1996:-1:000000000000_2004:-1:010000000430_2005:-1:122430033004_2006:-1:193656640155_2007:-1:634212110911_2008:-1:111111164102_2009:-1:111100000000_2010:-1:101111112322_2011:-1:122221241511_2012:-1:232130203201_2013:-1:5015212111cf_2014:-1:e20112312222_2015:-1:135221123011_2016:3:225300000000" /></p>
 
                                     <p>There are sparkline implementations in JavaScript libraries like d3.js and jQuery. Sparkline implementations also exist for command-line interfaces. These tools tend to take input data in tabular form (CSV). Sparklines can also be created by simple use of <a href="https://rosettacode.org/wiki/Sparkline_in_unicode">Unicode characters</a>: <code>▂▁▄▃▆▅█▇</code>.</p>
 
@@ -195,7 +197,7 @@
                             <section id="rdf-data-cube-and-sparql" inlist="" rel="schema:hasPart" resource="#rdf-data-cube-and-sparql">
                                 <h3 property="schema:name">RDF Data Cube and SPARQL</h3>
                                 <div datatype="rdf:HTML" property="schema:description">
-                                    <p>Statistical data that is modelled with the RDF Data Cube vocabulary makes it possible to discover and identify artefacts in a uniform way. This is in contrast to writing applications to consume data from endpoints with heterogeneous data models. For front-end Web applications, data can be fetched, explored, and filtered through via statistical linked dataspaces with SPARQL endpoints, e.g., <a href="http://270a.info/">http://270a.info/</a>. Utilising this method of access from within various types of articles on the Web, makes it possible to build applications which put more focus on user-interfaces - the heavy lifting - in comparison to handling different data models case by case, or superfluous data integration tasks. Furthermore, having easy access to highly structured multidimensional data - essentially through an <code>HTTP GET</code> request - makes it desirable to conceive static and real-time visualisations.</p>
+                                    <p>Statistical data that is modelled with the RDF Data Cube vocabulary makes it possible to discover and identify artefacts in a uniform way. This is in contrast to writing applications to consume data from endpoints with heterogeneous data models. For front-end Web applications, data can be fetched, explored, and filtered from <a href="http://csarven.ca/statistical-linked-dataspaces">statistical linked dataspaces</a> with SPARQL endpoints, e.g., <a href="http://270a.info/">http://270a.info/</a>. Utilising this method of access from within various types of articles on the Web, makes it possible to build applications which put more focus on user-interfaces - the heavy lifting - in comparison to handling different data models case by case, or superfluous data integration tasks. Furthermore, having easy access to highly structured multidimensional data - essentially through an <code>HTTP GET</code> request - makes it desirable to conceive static and real-time visualisations.</p>
 
                                     <p><a href="http://www.few.vu.nl/~wrvhage/papers/LOP_JoDS_2012.pdf">Linked Open Piracy: A story about e-Science, Linked Data, and statistics</a> [<a href="#ref-10">10</a>] investigated analysis and visualization of piracy reports to answer domain questions through a <a href="http://cran.r-project.org/web/packages/SPARQL/index.html">SPARQL client for R</a> [<a href="#ref-11">11</a>].</p>
 
@@ -225,192 +227,112 @@
                             <table>
                                 <caption>Static and Dynamic Sparklines</caption>
                                 <thead>
-                                    <tr><th>Data Type</th><th>Description</th><th>Data Shape</th></tr>
+                                    <tr><th></th><th>Use</th><th>Methods</th><th>Example</th></tr>
                                 </thead>
                                 <tfoot>
                                 </tfoot>
                                 <tbody>
                                     <tr>
                                         <th>Static</th>
-                                        <td>Human author for a journal wants to include a graphic (SVG) in their article. Author uses the system to import a pre-built figure to desired location in the article</td>
-                                        <td>Static data. Suitable for displaying historical data</td>
+                                        <td>Historical data or a fixed snapshot</td>
+                                        <td>
+                                            <ul>
+                                                <li>Pre-rendered</li>
+                                                <li>From a datastore and embedded directly</li>
+                                            </ul>
+                                        </td>
+                                        <th><embed class="sparkline" src="media/images/GDP-per-capita-growth--annual---.svg" height="240" rel="schema:image" type="image/svg+xml" width="640" /></th>
                                     </tr>
                                     <tr>
                                         <th>Dynamic</th>
-                                        <td></td>
-                                        <td>Up to date or near real-time data on article load. Optionally asynchronously polled or subscribed to stream. Updates may come any time.</td>
+                                        <td>Data which is still being gathered of updates, or for which the values may change any time</td>
+                                        <td>
+                                            <ul>
+                                                <li>Pulls from a datastore and re-fetches on page load or polls in real-time</li>
+                                                <li>embed source as API endpoint which provides the sparkline from URL params</li>
+                                            </ul>
+                                        </td>
+                                        <th><embed class="sparkline" src="http://stats.270a.info/sparkline.svg?void:sparqlEndpoint=http%3A%2F%2Fworldbank.270a.info%2Fsparql&amp;qb:DataSet=http%3A%2F%2Fworldbank.270a.info%2Fdataset%2FNY.GDP.MKTP.CD&amp;refArea=CA" type="image/svg+xml" /></th>
                                     </tr>
                                 </tbody>
                             </table>
-
-                            <section id="static-reference" inlist="" rel="schema:hasPart" resource="#static-reference">
-                                <h3 property="schema:name">Static reference</h3>
-                                <div property="schema:description" datatype="rdf:HTML">
-                                    <dl>
-                                        <dt>Description</dt>
-                                        <dd>Human author for a journal wants to include a graphic (SVG) in their article. Author uses the system to import a pre-built figure to desired location in the article.</dd>
-                                    </dl>
-
-                                    <dl>
-                                        <dt>Data Shape</dt>
-                                        <dd>Static data. Suitable for displaying historical data</dd>
-                                    </dl>
-
-                                    <dl>
-                                        <dt>Methods</dt>
-                                        <dd>File upload or drag-drop from desktop, or link to an external image or embed the image data using the data URI.</dd>
-                                    </dl>
-
-                                    <dl>
-                                        <dt>Workflow</dt>
-                                        <dd>
-                                            <ol property="schema:hasPart" resource="#static-reference-workflow" typeof="opmw:WorkflowTemplate deo:Model">
-                                                <li id="static-reference-import-figure" about="#static-reference-import-figure" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#static-reference-workflow" property="rdfs:label">User clicks 'Import sparkline' button</li>
-                                                <li id="static-reference-select-figure" about="#static-reference-select-figure" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#static-reference-workflow" property="rdfs:label">User browses to file on desktop system and select</li>
-                                                <li id="static-reference-upload-figure" about="#static-reference-upload-figure" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#static-reference-workflow" property="rdfs:label">User clicks 'Upload' button</li>
-                                            </ol>
-                                        </dd>
-                                    </dl>
-
-                                    <dl>
-                                        <dt>Example</dt>
-                                        <dd><span rel="schema:hasPart" resource="#figure-GDP-per-capita-growth--annual---">
-                                        <a href="http://worldbank.270a.info/dataset/NY.GDP.PCAP.KD.ZG" property="schema:name" rel="prov:wasDerivedFrom" resource="http://worldbank.270a.info/dataset/NY.GDP.PCAP.KD.ZG" typeof="qb:DataSet">GDP per capita growth (annual %)</a> [Canada] <span rel="schema:image" resource="#GDP-per-capita-growth--annual---"><embed class="sparkline" src="media/images/GDP-per-capita-growth--annual---.svg" height="240" rel="schema:image" type="image/svg+xml" width="640" /></span></span></dd>
-                                    </dl>
-                                </div>
-                            </section>
-
-                            <section id="dynamic-reference" inlist="" rel="schema:hasPart" resource="#dynamic-reference">
-                                <h3 property="schema:name">Dynamic reference</h3>
-                                <div property="schema:description" datatype="rdf:HTML">
-                                    <dl>
-                                        <dt>Description</dt>
-                                        <dd></dd>
-                                    </dl>
-
-                                    <dl>
-                                        <dt>Data Shape</dt>
-                                        <dd>Up to date or near real-time data on article load. Optionally asynchronously polled or subscribed to stream. Updates may come any time.</dd>
-                                    </dl>
-
-                                    <dl>
-                                        <dt>Methods</dt>
-                                        <dd>Use embed/object to call a URL which builds itself and returns an SVG</dd>
-                                    </dl>
-
-                                    <dl>
-                                        <dt>Workflow</dt>
-                                        <dd>
-                                            <ol property="schema:hasPart" resource="#dyanmic-reference-workflow" typeof="opmw:WorkflowTemplate deo:Model">
-                                                <li id="dyanmic-reference-text-entry" about="#interactive-annotation-text-entry" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#dyanmic-reference-workflow" property="rdfs:label">User selects API endpoint</li>
-                                                <li>User selects dataset</li>
-                                                <li>User selects dimensions</li>
-                                                <li>User confirms sparkline</li>
-                                                <li>System embeds sparkline</li>
-                                            </ol>
-                                        </dd>
-                                    </dl>
-
-                                    <dl>
-                                        <dt>Example</dt>
-                                        <dd>TODO: port http://stats.270a.info/sparkline</dd>
-                                    </dl>
-                                </div>
-                            </section>
                         </div>
                     </section>
 
                     <section id="embedding-sparqlines" inlist="" rel="schema:hasPart" resource="embedding-sparqlines">
                         <h2 property="schema:name">Embedding Sparqlines</h2>
                         <div datatype="rdf:HTML" property="schema:description">
-                           <p><strong>Text to URL</strong>: disambiguation; user input to closest matching URL</p>
+                            <p>Our implementation allows authors to select text they have written which describes the data they want to visualise; it searches available datasets for those relevant to the text, and lets the user choose the most appropriate if there's more than one. The sparqline is inserted along with a reference to the source.</p>
 
-                            <section id="interactive-annotation" inlist="" rel="schema:hasPart" resource="#interactive-annotation">
-                                <h3 property="schema:name">Interactive Annotation</h3>
-                                <div property="schema:description" datatype="rdf:HTML">
-                                    <dl>
-                                        <dt>Description</dt>
-                                        <dd>Human author for a journal wants to associate a graphic (SVG) in their article by way of annotating a span of text in a paragraph. The authoring tooling uses a publicly accessible system on the Web with statistical datasets. The author selects a desired matching dataset to their initial inquiry, and includes both a reference to the source dataset and the corresponding sparkline.</dd>
-                                    </dl>
+                            <p>A specific example workflow is demonstrated when this article is viewed in a Web browser (at its canonical URL: http://csarven.ca/sparqlines-sparql-to-sparkline). Enable the <button class="editor-enable" title="Enable editor"><i class="fa fa-i-cursor"></i>Edit</button> mode from the <button>☰</button> menu and highlight the text <samp id="interactive-annotation-example">GDP of Canada</samp>. What occurs is as follows:</p>
 
-                                    <dl>
-                                        <dt>Methods</dt>
-                                        <dd>Inline-text annotation using authoring tool</dd>
-                                    </dl>
+                            <ol property="schema:hasPart" resource="#interactive-annotation-workflow" typeof="opmw:WorkflowTemplate deo:Model">
+                                <li id="interactive-annotation-text-entry" about="#interactive-annotation-text-entry" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User enters text in a sentence e.g., <samp>GDP of Canada</samp>.</li>
+                                <li id="interactive-annotation-text-selection" about="#interactive-annotation-text-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User selects text <samp>GDP of Canada</samp> with their mouse or keyboard.</li>
+                                <li id="interactive-annotation-toolbar-selection" about="#interactive-annotation-toolbar-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">The authoring toolbar is presented to the user, and user selects the <q>sparkline</q> option.</li>
+                                <li id="interactive-annotation-tokenise-text" about="#interactive-annotation-tokenise-text" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">The input text is split into two: 1) <samp>GDP</samp> and 2) <samp>Canada</samp> segments, whereby the first term is the concept, and the second is a reference area. Reference areas are disambiguated against an internal dictionary.</li>
+                                <li id="interactive-annotation-sparql-query-for-input" about="#interactive-annotation-sparql-query-for-input" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">Systems constructs a SPARQL query URL and sends it to the World Bank Linked Dataspace endpoint, looking for a graph pattern where the datasets of labels have <q>GDP</q> in them in which there is at least one observation for the reference area <q>Canada</q>.</li>
+                                <li id="interactive-annotation-dataset-selection" about="#interactive-annotation-dataset-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User is is given a list of datasets to select from which match the above criteria, and the user selects desired dataset.</li>
+                                <li id="interactive-annotation-sparql-query-observations" about="#interactive-annotation-sparql-query-observations" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">System sends a SPARQL query to get the observations of the selected dataset for Canada.</li>
+                                <li id="interactive-annotation-create-sparkline" about="#interactive-annotation-create-sparkline" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">A sparkline is created and displayed for the user, also indicating the number of observations it has.</li>
+                                <li id="interactive-annotation-embed-sparkline" about="#interactive-annotation-embed-sparkline" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">If the user is happy with this visualisation they include it in the text. A hyperlink to the dataset, and a sparkline SVG is inserted back into the sentence replacing <samp>GDP of Canada</samp> with <samp>GDP per capita growth (annual %)</samp>.</li>
+                            </ol>
 
-                                    <p>Viewers of this article (at its canonical URL: http://csarven.ca/sparqlines-sparql-to-sparkline) in a Web browser can replicate the workflow by enabling the <button class="editor-enable" title="Enable editor"><i class="fa fa-i-cursor"></i>Edit</button> mode from the <button>☰</button> menu and highlighting the text: <samp id="interactive-annotation-example">GDP of Canada</samp>:</p>
+                            <p>Figure [<a href="#figure-dokieli-sparkline">2</a>] is a video screencast of this interaction.</p>
 
-                                    <dl>
-                                        <dt>Workflow</dt>
-                                        <dd>
-                                            <ol property="schema:hasPart" resource="#interactive-annotation-workflow" typeof="opmw:WorkflowTemplate deo:Model">
-                                                <li id="interactive-annotation-text-entry" about="#interactive-annotation-text-entry" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User enters text in a sentence e.g., <samp>GDP of Canada</samp></li>
-                                                <li id="interactive-annotation-text-selection" about="#interactive-annotation-text-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User selects text <samp>GDP of Canada</samp> with their mouse or keyboard</li>
-                                                <li id="interactive-annotation-toolbar-selection" about="#interactive-annotation-toolbar-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">The authoring toolbar is presented to the user, and user selects the <q>sparkline</q> option</li>
-                                                <li id="interactive-annotation-tokenise-text" about="#interactive-annotation-tokenise-text" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">The input text is split into two: 1) <samp>GDP</samp> and 2) <samp>Canada</samp> segments</li>
-                                                <li id="interactive-annotation-sparql-query-for-input" about="#interactive-annotation-sparql-query-for-input" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">Systems constructs a SPARQL query URL and sends it to the World Bank Linked Dataspace endpoint, looking for a graph pattern where the datasets of labels have <q>GDP</q> in them in which there is at least one observation for the reference area <q>Canada</q></li>
-                                                <li id="interactive-annotation-dataset-selection" about="#interactive-annotation-dataset-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User is is given a list of datasets to select from which match the above criteria, and the user selects desired dataset</li>
-                                                <li id="interactive-annotation-sparql-query-observations" about="#interactive-annotation-sparql-query-observations" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">System sends a SPARQL query to get the observations of the selected dataset for Canada</li>
-                                                <li id="interactive-annotation-create-sparkline" about="#interactive-annotation-create-sparkline" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">A sparkline is created and displayed for the user, also indicating the number of observations it has</li>
-                                                <li id="interactive-annotation-embed-sparkline" about="#interactive-annotation-embed-sparkline" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#interactive-annotation-workflow" property="rdfs:label">User submits the sparkline to be included in the text, a hyperlink to the dataset, and a sparkline SVG is inserted back into the sentence replacing <samp>GDP of Canada</samp> with <samp>GDP per capita growth (annual %)</samp></li>
-                                            </ol>
-                                        </dd>
-                                    </dl>
+                            <figure id="figure-dokieli-sparkline" rel="schema:hasPart" resource="#figure-dokieli-sparkline">
+                                <video controls="controls" height="600" id="video-dokieli-sparkline" poster="media/images/GDP-per-capita-growth--annual---.svg" preload="none" rel="schema:hasPart" width="800">
+                                    <source about="#video-dokieli-sparkline" rel="schema:hasPart" resource="https://dokie.li/media/video/dokieli-sparkline.webm" src="https://dokie.li/media/video/dokieli-sparkline.webm" type="video/webm" typeof="fabio:Film">
+                                        <span about="https://dokie.li/media/video/dokieli-sparkline.webm" property="schema:name">Video of sparkline interaction in dokieli</span>
+                                    </source>
+                                </video>
+                                <figcaption property="schema:name">Video of sparkline interaction in dokieli</figcaption>
+                            </figure>
 
-                                    <dl>
-                                        <dt>Example</dt>
-                                        <dd>
-                                            <p>Figure [<a href="#figure-dokieli-sparkline">2</a>] is a video screencast of this interaction.</p>
-
-                                            <figure id="figure-dokieli-sparkline" rel="schema:hasPart" resource="#figure-dokieli-sparkline">
-                                                <video controls="controls" height="600" id="video-dokieli-sparkline" poster="media/images/GDP-per-capita-growth--annual---.svg" preload="none" rel="schema:hasPart" width="800">
-                                                    <source about="#video-dokieli-sparkline" rel="schema:hasPart" resource="https://dokie.li/media/video/dokieli-sparkline.webm" src="https://dokie.li/media/video/dokieli-sparkline.webm" type="video/webm" typeof="fabio:Film">
-                                                        <span about="https://dokie.li/media/video/dokieli-sparkline.webm" property="schema:name">Video of sparkline interaction in dokieli</span>
-                                                    </source>
-                                                </video>
-                                                <figcaption property="schema:name">Video of sparkline interaction in dokieli</figcaption>
-                                            </figure>
-
-                                            <style type="text/css">/*<![CDATA[*/
-                                                #interactive-annotation button {
-                                                    line-height:1;
-                                                    font-size:initial;
-                                                    font-family: sans-serif;
-                                                    font-weight: normal;
-                                                }
-                                                #interactive-annotation .editor-enable,
-                                                #interactive-annotation .editor-disable {
-                                                    background-color: #fff;
-                                                    border: 0 none;
-                                                    margin: 0;
-                                                    padding: 0;
-                                                }
-                                                #interactive-annotation .editor-enable i,
-                                                #interactive-annotation .editor-disable i {
-                                                    margin-right:0.25em;
-                                                }
-                                                #interactive-annotation .editor-disable {
-                                                    background-color:#eee;
-                                                }
-                                            /*]]>*/</style>
-                                        </dd>
-                                    </dl>
-                                </div>
-                            </section>
-
-                            <section id="api-reference" inlist="" rel="schema:hasPart" resource="api-reference">
-                                <h3 property="schema:name">API reference</h3>
-                                <div datatype="rdf:HTML" property="schema:description">
-                                    <p><embed class="sparkline" src="http://stats.270a.info/sparkline.svg?void:sparqlEndpoint=http%3A%2F%2Fworldbank.270a.info%2Fsparql&amp;qb:DataSet=http%3A%2F%2Fworldbank.270a.info%2Fdataset%2FNY.GDP.MKTP.CD&amp;refArea=CA" type="image/svg+xml" /></p>
-                                </div>
-                            </section>
+                            <style type="text/css">/*<![CDATA[*/
+                                #interactive-annotation button {
+                                    line-height:1;
+                                    font-size:initial;
+                                    font-family: sans-serif;
+                                    font-weight: normal;
+                                }
+                                #interactive-annotation .editor-enable,
+                                #interactive-annotation .editor-disable {
+                                    background-color: #fff;
+                                    border: 0 none;
+                                    margin: 0;
+                                    padding: 0;
+                                }
+                                #interactive-annotation .editor-enable i,
+                                #interactive-annotation .editor-disable i {
+                                    margin-right:0.25em;
+                                }
+                                #interactive-annotation .editor-disable {
+                                    background-color:#eee;
+                                }
+                            /*]]>*/</style>
                         </div>
                     </section>
 
                     <section id="semantic-publishing">
                         <h2 property="schema:name">Semantic Publishing</h2>
                         <div datatype="rdf:HTML" property="schema:description">
-                            <p><strong>Semantic publishing</strong>: RDFa relations from the article to the SVG, RDFa in SVG (license, URLs to source)</p>
+                            <p>Our implementation in dokieli automatically includes semantic annotations within the embedded sparqlines. The sparkline resource has its own URI which be used for global referencing. The RDF statements are represented using the HTML+RDFa syntax, and they preserve the following information:</p>
+
+                            <ul>
+                                <li>The part of the document to which the sparqline belongs (<code>rel="schema:hasPart"</code>).</li>
+                                <li>The human-readable name for the figure (based on the dataset used), where it was derived from (the <code>qb:DataSet</code> instance), and the generated graphic (in SVG).</li>
+                                <li>The SVG resource has statements to indicate:
+                                    <ul>
+                                        <li>linked statistical dataset which was used (<code>rel="prov:wasDerivedFrom"</code>).</li>
+                                        <li>human-readable name of the dataset (<code>property="schema:name"</code>).</li>
+                                        <li>license for the generated SVG (<code>rel="schema:license"</code>).</li>
+                                        <li>further information for each <code>qb:Observation</code> (<code>rel="rdfs:seeAlso"</code>).</li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <p>This information can be discovered and parsed as RDF, thus making easy to access and reuse by third-party applications. For example, another author can cite or include these sparqlines in their work.</p>
                         </div>
                     </section>
 
