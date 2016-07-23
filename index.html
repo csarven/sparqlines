@@ -41,7 +41,7 @@
                     <dt>Document ID</dt>
                     <dd><a href="http://csarven.ca/sparqlines-sparql-to-sparkline" rel="owl:sameAs">http://csarven.ca/sparqlines-sparql-to-sparkline</a></dd>
                 </dl>
-
+<!--
                 <dl id="document-inbox">
                     <dt>Notifications Inbox</dt>
                     <dd><a href="https://linkedresearch.org/inbox/temp/sparqlines/" rel="solid:inbox">inbox/</a></dd>
@@ -66,7 +66,7 @@
                     <dt>License</dt>
                     <dd><a href="https://creativecommons.org/licenses/by/4.0/" rel="schema:license" title="Creative Commons Attribution 4.0 Unported">CC BY 4.0</a></dd>
                 </dl>
-
+ -->
                 <div id="content">
                     <section id="abstract">
                         <h2>Abstract</h2>
@@ -160,9 +160,9 @@
                         <div datatype="rdf:HTML" property="schema:description">
                             <p>In this article we introduce <em>sparqlines</em>, an integration of statistical data retrieval using SPARQL with displaying observations in the form of word-size graphics; sparklines. We describe an implementation which is part of a Web based authoring tool (<a href="https://dokie.li/">dokieli</a>). We cover how the data is modelled and exposed in order to be suitable for embedding; demonstrate how to embed data as both static and dynamic sparklines and discuss the technical requirements of each; and walk through the user interactions to do so.</p>
 
-                            <p>Our contribution is the generation of a well-established visual aid to reading statistical data (the sparkline) directly from the dataset itself, at the time of authoring the supporting text, i.e., as part of the writing workflow. This enables authors who are already publishing open data to use it directly, as well as encouraging them to make their data available for others to use, and offers an easy way to present the reader with a way to better understand the information.</p>
+                            <p>Our contribution is the generation of a well-established visual aid to reading statistical data (the sparkline) directly from the dataset itself, at the time of authoring the supporting text as part of the writing workflow. This enables authors who are already publishing open data to use it directly, as well as encouraging them to make their data available for others to use, and offers an easy way to present the reader with a way to better understand the information.</p>
 
-                            <p>We conclude with a discussion of the implications of this work, including design considerations and potential privacy issues. The code of our implementation is open source, and we invite you to try it out and make requests for more advanced features.</p>
+                            <p>We conclude with a discussion of the implications of this work, including design and architectural considerations. The code of our implementation is open source, and we invite you to try it out and make requests for more advanced features.</p>
                         </div>
                     </section>
 
@@ -195,13 +195,13 @@
                             <section id="rdf-data-cube-and-sparql" inlist="" rel="schema:hasPart" resource="#rdf-data-cube-and-sparql">
                                 <h3 property="schema:name">RDF Data Cube and SPARQL</h3>
                                 <div datatype="rdf:HTML" property="schema:description">
-                                    <p>Statistical data that is modelled with the RDF Data Cube vocabulary [<a href="#ref-5">5</a>] makes it possible to discover and identify artefacts in a uniform way. This is in contrast to writing applications to consume data from endpoints with heterogeneous data models. For front-end Web applications, data can be fetched, explored, and filtered from <a href="http://csarven.ca/statistical-linked-dataspaces">statistical linked dataspaces</a> with SPARQL endpoints, e.g., <a href="http://270a.info/">http://270a.info/</a>. Utilising this method of access from within various types of articles on the Web, makes it possible to build applications which put more focus on user-interfaces rather than handling different data models case by case, or burdensome data integration tasks. Furthermore, having easy access to highly structured multidimensional data - essentially through an <code>HTTP GET</code> request - makes it desirable to create static and real-time visualisations.</p>
+                                    <p>Statistical data that is modelled with the RDF Data Cube vocabulary [<a href="#ref-5">5</a>] makes it possible to discover and identify artefacts in a uniform way. This is in contrast to writing applications to consume data from endpoints with heterogeneous data models. For front-end Web applications, data can be fetched, explored, and filtered from <a href="http://csarven.ca/statistical-linked-dataspaces">statistical linked dataspaces</a> with SPARQL endpoints, e.g., <a href="http://270a.info/">http://270a.info/</a>. Utilising this method of access from within various types of articles on the Web, makes it possible to build applications which put more focus on user-interfaces rather than handling different data models case by case, or burdensome data integration tasks. Furthermore, having easy access to highly structured multi-dimensional data - essentially through an <code>HTTP GET</code> request - makes it desirable to create static and real-time visualisations.</p>
 
                                     <p>Investigation of analysis and visualisation piracy reports have been conducted through querying a SPARQL endpoint with R [<a href="#ref-6">6</a>].</p>
 
                                     <p><a href="http://aksw.org/Projects/CubeViz">CubeViz</a> was developed to visualise multidimensional statistical data. It is a faceted browser, which utilizes the RDF Data Cube vocabulary, with a chart visualisation component [<a href="#ref-7">7</a>].</p>
 
-                                    <p><a href="http://csarven.ca/linked-statistical-data-analysis">Linked Statistical Data Analysis</a> [<a href="#ref-8">8</a>], explores a way to reuse statistical linked dataspaces, federated queries, and generation of statistical analyses e.g., regression, for humans and machines. The <a href="http://stats.270a.info/">stats.270a.info</a> service stores computed analysis, and makes it possible for future discovery.</p>
+                                    <p><a href="http://csarven.ca/linked-statistical-data-analysis">Linked Statistical Data Analysis</a> [<a href="#ref-8">8</a>], presents a way to reuse data through federated SPARQL queries, and generation of statistical analyses and scatter plots. The <a href="http://stats.270a.info/">stats.270a.info</a> service stores computed analysis, and makes it possible for future discovery.</p>
                                 </div>
                             </section>
 
@@ -216,7 +216,7 @@
 
                             <p>The RDF Data Cube vocabulary is used to describe multi-dimensional statistical data. It makes it possible to represent significant amounts of heterogeneous statistical data as Linked Data which can be discovered and identified in a uniform way. To qualify for consumption as a sparqline, the data must conform with some of the integrity constraints of the RDF Data Cube model, e.g., IC-1 (Unique DataSet), IC-11 (All dimensions required), IC-12 (No duplicate observations), IC-14 (All measures present).</p>
 
-                            <p>Additional enrichments on the data cubes can improve their discovery and reuse. Examples include but not limited to; providing a human-readable <em>labels</em> for the datasets (possibly with language tags), <em>classifications</em>, and <em>data structure definition</em>, as well as <em>provenance</em> level data like license, last updated.</p>
+                            <p>Additional enrichments on the data cubes can improve their discovery and reuse. Examples include but not limited to; providing human-readable <em>labels</em> for the datasets (with language tags), <em>classifications</em>, and <em>data structure definition</em>, as well as <em>provenance</em> level data like license, last updated.</p>
 
                             <p>In order to allow user interfaces which can utilise a group of observations in a dataset, <em>slices</em> should be made available in the data. This enables consuming applications to dissect datasets (through SPARQL queries) for arbitrary subsets of observations. For example, while it is possible to construct a general query to get all of the observations in dataset which have a particular dimension, it may be preferable to only query for such subsets provided that their structures can be identified and externally referenced. In the case of sparklines, one common use case for slices is to present data in time-series.</p>
 
@@ -280,7 +280,7 @@
                                 <li id="interactive-annotation-create-sparkline" about="#embedding-sparqlines-create-sparkline" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#embedding-sparqlines-workflow" property="rdfs:label">A sparkline is created and displayed for the user, also indicating the number of observations it has.</li>
                                 <li id="interactive-annotation-embed-sparkline" about="#embedding-sparqlines-embed-sparkline" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#embedding-sparqlines-workflow" property="rdfs:label">If the user is happy with this visualisation they include it in the text. A hyperlink to the dataset, and a sparkline SVG is inserted back into the sentence replacing <samp>GDP of Canada</samp> with <samp>GDP per capita growth (annual %)</samp>.</li>
                             </ol>
-
+<!--
                             <p>Figure [<a href="#figure-dokieli-sparkline">2</a>] is a video screencast of this interaction.</p>
 
                             <figure id="figure-dokieli-sparkline" rel="schema:hasPart" resource="#figure-dokieli-sparkline">
@@ -291,7 +291,7 @@
                                 </video>
                                 <figcaption property="schema:name">Video of sparkline interaction in dokieli</figcaption>
                             </figure>
-
+ -->
                             <style type="text/css">/*<![CDATA[*/
                                 #embedding-sparqlines button {
                                     line-height:1;
@@ -344,7 +344,7 @@
                         <div datatype="rdf:HTML" property="schema:description" resource="#discussion-and-conclusions" typeof="deo:Discussion">
                             <p>We have presented a preliminary implementation of sparklines generated from SPARQL endpoints and embedded directly through authoring tool. This allows authors to visualise their data in an optimal way without breaking their workflow. However, there is a lot of scope for future work in this area. We now discuss some areas for further development.</p>
 
-                            <p><strong>Design principles</strong>: Tufte makes recommendations on readability, as well as applying Cleveland's analytical method of choosing aspect ratios <em>banking to 45°</em> [<a href="#ref-9">9</a>][<a href="#ref-10">10</a>]. Cleveland's method has been extended to generate banked sparklines by providing the vertical dimension to fit a typographical line. These approaches are intended to help maximize the clarity of the line segments [<a href="#ref-11">11</a>]. Applying the banking to 45° method is a future implementation in dokieli (<a href="https://github.com/linkeddata/dokieli/issues/159">issue 159</a>).</p>
+                            <p><strong>Design principles</strong>: Tufte makes recommendations on readability, as well as applying Cleveland's analytical method of choosing aspect ratios <em>banking to 45°</em> [<a href="#ref-2">2</a>, <a href="#ref-9">9</a>, <a href="#ref-10">10</a>]. Cleveland's method has been extended to generate banked sparklines by providing the vertical dimension to fit a typographical line. These approaches are intended to help maximize the clarity of the line segments [<a href="#ref-11">11</a>]. Applying the banking to 45° method is a future implementation in dokieli (<a href="https://github.com/linkeddata/dokieli/issues/159">issue 159</a>).</p>
 
                             <p><strong>Dataset interaction</strong>: Building on existing work in faceted searching and browsing of RDF data, authors can explore suitable datasets with a combination of searching using natural-language and filtering through available datasets and dimensions of interest. This approach is convenient for datasets in RDF Data Cubes since they are highly structured and classified. Further work is needed to improve the process for disambiguation of the author's input in natural language in order to discover appropriate URIs in the dataset.</p>
 
@@ -357,7 +357,7 @@
                     <section id="acknowledgements" inlist="" rel="schema:hasPart" resource="#acknowledgements">
                         <h2 about="#acknowledgements" property="schema:name" typeof="deo:Acknowledgements">Acknowledgements</h2>
                         <div datatype="rdf:HTML" property="schema:description">
-                            <p>The motivation and work on sparqlines was inspired by Edward Tufte's education and popularisation of sparklines. Special thanks to <a href="http://rhiaro.co.uk/#me">Amy Guy</a> and <a href="http://people.csail.mit.edu/ilaria/">Ilaria Liccardi</a> for their support and tireless nagging to get this written up.</p>
+                            <p>The motivation and work on sparqlines was inspired by Edward Tufte's education and popularisation of sparklines. Special thanks to <a href="http://rhiaro.co.uk/#me">Amy Guy</a> and <a href="http://people.csail.mit.edu/ilaria/">Ilaria Liccardi</a> for their great support and tireless nagging to get this written up.</p>
                         </div>
                     </section>
 
@@ -367,23 +367,21 @@
                             <ol>
                                 <li id="ref-1">Zelchenko, P., Medved, M.: QuoteTracker, <a href="http://pete.zelchenko.com/portfolio/screen/2gk.htm" rel="schema:citation">http://pete.zelchenko.com/portfolio/screen/2gk.htm</a></li>
 
-                                <li id="ref-2"><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR&amp;topic_id=1" rel="schema:citation">http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR&amp;topic_id=1</a></li>
+                                <li id="ref-2">Tufte, E.: Beautiful Evidence, Graphics Press, 2006, ISBN 9781930824164, <a href="http://www.worldcat.org/title/beautiful-evidence/oclc/70203994&referer=brief_results" rel="schema:citation">http://www.worldcat.org/title/beautiful-evidence/oclc/70203994&referer=brief_results</a></li>
 
-                                <li id="ref-12">P. Meharia: Use of Visualization in Digital Financial Reporting: The effect of Sparkline (2012). Theses and Dissertations--Business Administration. <a href="http://uknowledge.uky.edu/busadmin_etds/1/">Paper 1</a>, <a href="http://uknowledge.uky.edu/cgi/viewcontent.cgi?article=1000&amp;context=busadmin_etds" rel="schema:citation">http://uknowledge.uky.edu/cgi/viewcontent.cgi?article=1000&amp;context=busadmin_etds</a></li>
+                                <li id="ref-3">P. Meharia: Use of Visualization in Digital Financial Reporting: The effect of Sparkline (2012). Theses and Dissertations--Business Administration. <a href="http://uknowledge.uky.edu/busadmin_etds/1/">Paper 1</a>, <a href="http://uknowledge.uky.edu/cgi/viewcontent.cgi?article=1000&amp;context=busadmin_etds" rel="schema:citation">http://uknowledge.uky.edu/cgi/viewcontent.cgi?article=1000&amp;context=busadmin_etds</a></li>
 
                                 <li id="ref-4">Google Docs Sparklines, <a href="https://support.google.com/docs/answer/3093289?hl=en">https://support.google.com/docs/answer/3093289?hl=en</a></li>
 
-                                <li id="ref-5">RDF Data Cube vocabulary, <a href="" rel="schema:citation"></a></li>
+                                <li id="ref-5">Cyganiak, R., Reynolds, D.: The RDF Data Cube vocabulary, W3C Recommendation, 2014, <a href="https://www.w3.org/TR/vocab-data-cube/" rel="schema:citation">https://www.w3.org/TR/vocab-data-cube/</a></li>
 
-                                <li id="ref-6"><a href="" rel="schema:citation"></a></li>
+                                <li id="ref-6">Hage, W. R. v., Marieke v., Malaisé., V.: Linked Open Piracy: A story about e-Science, Linked Data, and statistics (2012),<a href="http://www.few.vu.nl/~wrvhage/papers/LOP_JoDS_2012.pdf" rel="schema:citation">http://www.few.vu.nl/~wrvhage/papers/LOP_JoDS_2012.pdf</a></li>
 
-                                <li id="ref-7"><a rel="schema:citation" href="http://svn.aksw.org/papers/2012/ESWC_PublishingStatisticData/public.pdf">Publishing Statistical Data on the Web</a></li>
+                                <li id="ref-7">Percy E. Rivera Salas, P. E. R., Mota, F. M. D., Martin, M., Auer, S., Breitman, K., Casanova, M. A.: Publishing Statistical Data on the Web, ISWC (2012), <a rel="schema:citation" href="http://svn.aksw.org/papers/2012/ESWC_PublishingStatisticData/public.pdf">http://svn.aksw.org/papers/2012/ESWC_PublishingStatisticData/public.pdf</a></li>
 
-                                <li id="ref-8"><a href="" rel="schema:citation"></a></li>
+                                <li id="ref-8">Capadisli, S., Auer, S. Riedl, R.: Linked Statistical Data Analysis, ISWC SemStats (2013), <a href="http://csarven.ca/linked-statistical-data-analysis" rel="schema:citation">http://csarven.ca/linked-statistical-data-analysis</a></li>
 
-                                <li id="ref-9"><a href="" rel="schema:citation"></a></li>
-
-                                <li id="ref-9"><a href="" rel="schema:citation"></a></li>
+                                <li id="ref-9">Edward Tufte forum: Sparkline theory and practice Edward Tufte, <a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR&amp;topic_id=1" rel="schema:citation">http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR&amp;topic_id=1</a></li>
 
                                 <li id="ref-10">C., William: Visualizing Data, Hobart Press, 1993, ISBN 9780963488404, <a href="http://dl.acm.org/citation.cfm?id=529269" rel="schema:citation">http://dl.acm.org/citation.cfm?id=529269</li>
 
