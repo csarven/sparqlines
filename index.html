@@ -160,9 +160,9 @@
                         <div datatype="rdf:HTML" property="schema:description">
                             <p>In this article we introduce <em>sparqlines</em>, an integration of statistical data retrieval using SPARQL with displaying observations in the form of word-size graphics; sparklines. We describe an implementation which is part of a Web based authoring tool (<a href="https://dokie.li/">dokieli</a>). We cover how the data is modelled and exposed in order to be suitable for embedding; demonstrate how to embed data as both static and dynamic sparklines and discuss the technical requirements of each; and walk through the user interactions to do so.</p>
 
-                            <p>Our contribution is the generation of a well-established visual aid to reading statistical data (the sparkline) directly from the dataset itself, at the time of authoring the supporting text as part of the writing workflow. This enables authors who are already publishing open data to use it directly, as well as encouraging them to make their data available for others to use, and offers an easy way to present the reader with a way to better understand the information.</p>
+                            <p>Our contribution is the generation of a well-established visual aid to reading statistical data (the sparkline) directly from the dataset itself, at the time of authoring the supporting text as part of the writing workflow. This enables authors who are already publishing data to use it directly, as well as encouraging them to make their data available for others to use, and offers an easy way to present the reader with a way to better understand the information.</p>
 
-                            <p>We conclude with a discussion of the implications of this work, including design and architectural considerations. The code of our implementation is open source, and we invite you to try it out and make requests for more advanced features.</p>
+                            <p>We conclude with a discussion on this work, including design and architectural considerations. The code of our implementation is open source, and we invite you to try it out and make requests for more advanced features.</p>
                         </div>
                     </section>
 
@@ -174,19 +174,26 @@
                                 <div datatype="rdf:HTML" property="schema:description">
                                     <p id="sparkline-description">The earliest known implementation of an inline-chart was designed and programmed by Peter Zelchenko and Mike Medved to represent historical charts efficiently in the QuoteTracker software in early 1999 [<a href="#ref-1">1</a>]. They are <q>datawords</q>, carrying dense information with the resolution of typography, particularly useful in places where the available screen real estate is minimal. <a href="http://www.edwardtufte.com/">Edward Tufte</a> describes sparkline as <q cite="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR&amp;topic_id=1"><a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR&amp;topic_id=1">small intense, simple, word-sized graphic with typographic resolution</a></q> [<a href="#ref-2">2</a>]. They are designed to be included anywhere, for example embedded in a sentence, table or even a map, within the relevant context. When embedded in a sentence, they support the text, allowing continuous reading <embed class="sparkline" src="media/images/GDP-per-capita-growth--annual---.svg" type="image/svg+xml" /> without the need to refer to a figure disjoint from the original context, whilst still providing an opportunity for the reader to investigate further by clicking on the data line to access each point of source, per <a href="#figure-static-sparkline">Figure 1</a>.</p>
 
-                                    <p id="sparkline-graphics">Sparkline graphics typically have a variable long dimension and a constrained short dimension. In the case of a typographic line, the constraint can be fixed to the height of the font-size of the encapsulating component. For example, the computed CSS <code>height</code> value of the <code>embed</code> HTML element that contains the sparkline on the current viewing device is <samp class="height">20px</samp>, and so the embedded sparkline in this paragraph will have a vertical aspect ratio of that value.</p>
+                                    <p id="sparkline-graphics">Sparkline graphics typically have a variable long dimension and a constrained short dimension. In the case of a typographic line, the constraint can be fixed to the height of the font-size of the encapsulating component. For example, the computed CSS <code>height</code> value of the <code>embed</code> HTML element that contains the sparkline on the current viewing device is <samp class="height">20px</samp>, and so the embedded sparkline in this paragraph will have a vertical aspect ratio as such.</p>
+
                                     <script>document.addEventListener('DOMContentLoaded', function(){var s = document.querySelector('#sparkline-description .sparkline'); document.querySelector('#sparkline-graphics .height').innerHTML = s.ownerDocument.defaultView.getComputedStyle(s, null)["height"];});</script>
 
                                     <figure id="figure-static-sparkline" rel="schema:hasPart" resource="#figure-static-sparkline">
-                                        <object style="min-height:60px !important;" data="media/images/GDP-per-capita-growth--annual---.svg" height="60" rel="schema:image" type="image/svg+xml" width="640"></object>
-                                        <figcaption property="schema:name">A typical static figure in an article disjoint from the context in which it is described</figcaption>
+                                        <object data="media/images/GDP-per-capita-growth--annual---.svg" height="60" rel="schema:image" type="image/svg+xml" width="640"></object>
+                                        <figcaption property="schema:name">A typical static figure in an article disjoint from the original context</figcaption>
                                     </figure>
+                                    <style>/*<![CDATA[*/
+                                        #figure-static-sparkline object {
+                                            height:60px !important;
+                                            min-height:60px !important;
+                                        }
+                                    /*]]>*/</style>
 
                                     <p>Sparkline appear in many places where small datafeeds are useful; programmatical insertion in text-editors and spreadsheets, fitness feeds from wearable watches, social media analytics, streaming real-time quotes, electroencephalograms, system dashboards and trays, temperature and stock activity, to name a few. Studies show that novice and experienced investors using stock report with Sparklines will experience reduced cognitive load [<a href="#ref-3">3</a>].</p>
 
                                     <p>Sparklines in line, bar, column or win/loss graphs can be programatically included in <cite>Google Drive</cite> documents by including data from an embedded table or sequence of numbers [<a href="ref-4">4</a>].</p>
 
-                                    <p>The <cite><a href="https://archive.org/web/">Wayback Machine</a></cite> uses sparklines to show an application of the snapshots of a URL through time: <img style="display:block" src="https://web.archive.org/web/jsp/graph.jsp?nomonth=1&amp;graphdata=1029_75_1996:-1:000000000000_2004:-1:010000000430_2005:-1:122430033004_2006:-1:193656640155_2007:-1:634212110911_2008:-1:111111164102_2009:-1:111100000000_2010:-1:101111112322_2011:-1:122221241511_2012:-1:232130203201_2013:-1:5015212111cf_2014:-1:e20112312222_2015:-1:135221123011_2016:3:225300000000" /></p>
+                                    <p>The <cite><a href="https://archive.org/web/">Wayback Machine</a></cite> uses sparklines to show an application of the snapshots of a URL through time: <img style="display:block; margin:1em 0;" src="https://web.archive.org/web/jsp/graph.jsp?nomonth=1&amp;graphdata=1029_75_1996:-1:000000000000_2004:-1:010000000430_2005:-1:122430033004_2006:-1:193656640155_2007:-1:634212110911_2008:-1:111111164102_2009:-1:111100000000_2010:-1:101111112322_2011:-1:122221241511_2012:-1:232130203201_2013:-1:5015212111cf_2014:-1:e20112312222_2015:-1:135221123011_2016:3:225300000000" /></p>
 
                                     <p>There are sparkline implementations in JavaScript libraries like d3.js and jQuery. Sparkline implementations also exist for command-line interfaces. These tools tend to take input data in tabular form (CSV). Sparklines can also be created by simple use of <a href="https://rosettacode.org/wiki/Sparkline_in_unicode">Unicode characters</a>: <code>▂▁▄▃▆▅█▇</code>.</p>
                                 </div>
@@ -204,8 +211,6 @@
                                     <p><a href="http://csarven.ca/linked-statistical-data-analysis">Linked Statistical Data Analysis</a> [<a href="#ref-8">8</a>], presents a way to reuse data through federated SPARQL queries, and generation of statistical analyses and scatter plots. The <a href="http://stats.270a.info/">stats.270a.info</a> service stores computed analysis, and makes it possible for future discovery.</p>
                                 </div>
                             </section>
-
-                            <p>An important use case to bare in mind is the ability to mix semantic publishing with the integration of statistical data and annotations.</p>
                         </div>
                     </section>
 
@@ -265,14 +270,14 @@
                     <section id="embedding-sparqlines" inlist="" rel="schema:hasPart" resource="embedding-sparqlines">
                         <h2 property="schema:name">Embedding Sparqlines</h2>
                         <div datatype="rdf:HTML" property="schema:description">
-                            <p>Our implementation allows authors to select text they have written which describes the data they want to visualise; it searches available datasets for those relevant to the text, and lets the user choose the most appropriate if there's more than one. The sparqline is inserted along with a reference to the source.</p>
+                            <p>Our implementation allows authors to select text they have written which describes the data they want to visualise; it searches available datasets for those relevant to the text, and lets the user choose the most appropriate if there’s more than one. The sparqline is inserted along with a reference to the source.</p>
 
                             <p>A specific example workflow is demonstrated when this article is viewed in a Web browser (at its canonical URL: http://csarven.ca/sparqlines-sparql-to-sparkline). Enable the <button class="editor-enable" title="Enable editor"><i class="fa fa-i-cursor"></i>Edit</button> mode from the <button>☰</button> menu and highlight the text <samp id="interactive-annotation-example">GDP of Canada</samp>. What occurs is as follows:</p>
 
                             <ol property="schema:hasPart" resource="#embedding-sparqlines-workflow" typeof="opmw:WorkflowTemplate deo:Model">
                                 <li id="interactive-annotation-text-entry" about="#embedding-sparqlines-text-entry" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#embedding-sparqlines-workflow" property="rdfs:label">User enters text in a sentence e.g., <samp>GDP of Canada</samp>.</li>
                                 <li id="interactive-annotation-text-selection" about="#embedding-sparqlines-text-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#embedding-sparqlines-workflow" property="rdfs:label">User selects text <samp>GDP of Canada</samp> with their mouse or keyboard.</li>
-                                <li id="interactive-annotation-toolbar-selection" about="#embedding-sparqlines-toolbar-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#embedding-sparqlines-workflow" property="rdfs:label">The authoring toolbar is presented to the user, and user selects the <q>sparkline</q> option.</li>
+                                <li id="interactive-annotation-toolbar-selection" about="#embedding-sparqlines-toolbar-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#embedding-sparqlines-workflow" property="rdfs:label">The user select the <q>sparkline</q> option from presented authoring toolbar.</li>
                                 <li id="interactive-annotation-tokenise-text" about="#embedding-sparqlines-tokenise-text" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#embedding-sparqlines-workflow" property="rdfs:label">The input text is split into two: 1) <samp>GDP</samp> and 2) <samp>Canada</samp> segments, whereby the first term is the concept, and the second is a reference area. Reference areas are disambiguated against an internal dictionary.</li>
                                 <li id="interactive-annotation-sparql-query-for-input" about="#embedding-sparqlines-sparql-query-for-input" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#embedding-sparqlines-workflow" property="rdfs:label">Systems constructs a SPARQL query URL and sends it to the World Bank Linked Dataspace endpoint, looking for a graph pattern where the datasets of labels have <q>GDP</q> in them in which there is at least one observation for the reference area <q>Canada</q>.</li>
                                 <li id="interactive-annotation-dataset-selection" about="#embedding-sparqlines-dataset-selection" typeof="opmw:WorkflowTemplateProcess" rel="opmw:isStepOfTemplate" resource="#embedding-sparqlines-workflow" property="rdfs:label">User is is given a list of datasets to select from which match the above criteria, and the user selects desired dataset.</li>
@@ -291,20 +296,17 @@
                                 </video>
                                 <figcaption property="schema:name">Video of sparkline interaction in dokieli</figcaption>
                             </figure>
- -->
+-->
                             <style type="text/css">/*<![CDATA[*/
                                 #embedding-sparqlines button {
-                                    line-height:1;
+                                    font-family:sans-serif;
                                     font-size:initial;
-                                    font-family: sans-serif;
-                                    font-weight: normal;
-                                }
-                                #embedding-sparqlines .editor-enable,
-                                #embedding-sparqlines .editor-disable {
-                                    background-color: #fff;
-                                    border: 0 none;
-                                    margin: 0;
-                                    padding: 0;
+                                    font-weight:normal;
+                                    line-height:1;
+                                    background-color:#fff;
+                                    border:0 none;
+                                    margin:0;
+                                    padding:0;
                                 }
                                 #embedding-sparqlines .editor-enable i,
                                 #embedding-sparqlines .editor-disable i {
@@ -344,11 +346,11 @@
                         <div datatype="rdf:HTML" property="schema:description" resource="#discussion-and-conclusions" typeof="deo:Discussion">
                             <p>We have presented a preliminary implementation of sparklines generated from SPARQL endpoints and embedded directly through authoring tool. This allows authors to visualise their data in an optimal way without breaking their workflow. However, there is a lot of scope for future work in this area. We now discuss some areas for further development.</p>
 
-                            <p><strong>Design principles</strong>: Tufte makes recommendations on readability, as well as applying Cleveland's analytical method of choosing aspect ratios <em>banking to 45°</em> [<a href="#ref-2">2</a>, <a href="#ref-9">9</a>, <a href="#ref-10">10</a>]. Cleveland's method has been extended to generate banked sparklines by providing the vertical dimension to fit a typographical line. These approaches are intended to help maximize the clarity of the line segments [<a href="#ref-11">11</a>]. Applying the banking to 45° method is a future implementation in dokieli (<a href="https://github.com/linkeddata/dokieli/issues/159">issue 159</a>).</p>
+                            <p><strong>Design principles</strong>: Tufte makes recommendations on readability, as well as applying Cleveland’s analytical method of choosing aspect ratios <em>banking to 45°</em> [<a href="#ref-2">2</a>, <a href="#ref-9">9</a>, <a href="#ref-10">10</a>]. Cleveland’s method has been extended to generate banked sparklines by providing the vertical dimension to fit a typographical line. These approaches help maximize the clarity of the line segments [<a href="#ref-11">11</a>]. Applying these methods is a future implementation in dokieli (<a href="https://github.com/linkeddata/dokieli/issues/159">issue 159</a>).</p>
 
-                            <p><strong>Dataset interaction</strong>: Building on existing work in faceted searching and browsing of RDF data, authors can explore suitable datasets with a combination of searching using natural-language and filtering through available datasets and dimensions of interest. This approach is convenient for datasets in RDF Data Cubes since they are highly structured and classified. Further work is needed to improve the process for disambiguation of the author's input in natural language in order to discover appropriate URIs in the dataset.</p>
+                            <p><strong>Dataset interaction</strong>: Building on existing work in faceted searching and browsing of RDF data, authors can explore suitable datasets with a combination of searching using natural-language and filtering through available datasets and dimensions of interest. This approach is convenient for datasets in RDF Data Cubes since they are highly structured and classified. Further work is needed to improve the process for disambiguation of the author’s input in natural language in order to discover appropriate URIs in the dataset.</p>
 
-                            <p><strong>Privacy considerations</strong>: Many researchers collect experimental data which has identifiable information for the participants. This information should not be exposed through public SPARQL endpoints. Measures such as access control lists can allow researchers to generate sparqlines over sensitive data.</p>
+                            <p><strong>Privacy considerations</strong>: Many researchers collect experimental data which has sensitive or identifiable information. This information should not be exposed through public SPARQL endpoints. Measures such as access control lists can allow researchers to generate sparqlines over sensitive data.</p>
 
                             <p><strong>Data availability</strong>: SPARQL endpoints are notoriously unreliable and they may have high setup costs for new datasets. Applications which rely on endpoints to generate sparqlines with dynamic data, may want to initially include a local cached copy from the last access point in the article. The application can then asynchronously fetch or subscribe for new updates.</p>
                         </div>
@@ -357,7 +359,7 @@
                     <section id="acknowledgements" inlist="" rel="schema:hasPart" resource="#acknowledgements">
                         <h2 about="#acknowledgements" property="schema:name" typeof="deo:Acknowledgements">Acknowledgements</h2>
                         <div datatype="rdf:HTML" property="schema:description">
-                            <p>The motivation and work on sparqlines was inspired by Edward Tufte's education and popularisation of sparklines. Special thanks to <a href="http://rhiaro.co.uk/#me">Amy Guy</a> and <a href="http://people.csail.mit.edu/ilaria/">Ilaria Liccardi</a> for their great support and tireless nagging to get this written up.</p>
+                            <p>The motivation and work on sparqlines was inspired by Edward Tufte’s education and popularisation of sparklines. Special thanks to <a href="http://rhiaro.co.uk/#me">Amy Guy</a> and <a href="http://people.csail.mit.edu/ilaria/">Ilaria Liccardi</a> for their great support and tireless nagging to get this written up.</p>
                         </div>
                     </section>
 
@@ -367,7 +369,7 @@
                             <ol>
                                 <li id="ref-1">Zelchenko, P., Medved, M.: QuoteTracker, <a href="http://pete.zelchenko.com/portfolio/screen/2gk.htm" rel="schema:citation">http://pete.zelchenko.com/portfolio/screen/2gk.htm</a></li>
 
-                                <li id="ref-2">Tufte, E.: Beautiful Evidence, Graphics Press, 2006, ISBN 9781930824164, <a href="http://www.worldcat.org/title/beautiful-evidence/oclc/70203994&referer=brief_results" rel="schema:citation">http://www.worldcat.org/title/beautiful-evidence/oclc/70203994&referer=brief_results</a></li>
+                                <li id="ref-2">Tufte, E.: Beautiful Evidence, Graphics Press, 2006, ISBN 9781930824164, <a href="http://www.worldcat.org/title/beautiful-evidence/oclc/70203994&amp;referer=brief_results" rel="schema:citation">http://www.worldcat.org/title/beautiful-evidence/oclc/70203994&amp;referer=brief_results</a></li>
 
                                 <li id="ref-3">P. Meharia: Use of Visualization in Digital Financial Reporting: The effect of Sparkline (2012). Theses and Dissertations--Business Administration. <a href="http://uknowledge.uky.edu/busadmin_etds/1/">Paper 1</a>, <a href="http://uknowledge.uky.edu/cgi/viewcontent.cgi?article=1000&amp;context=busadmin_etds" rel="schema:citation">http://uknowledge.uky.edu/cgi/viewcontent.cgi?article=1000&amp;context=busadmin_etds</a></li>
 
@@ -383,7 +385,7 @@
 
                                 <li id="ref-9">Edward Tufte forum: Sparkline theory and practice Edward Tufte, <a href="http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR&amp;topic_id=1" rel="schema:citation">http://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR&amp;topic_id=1</a></li>
 
-                                <li id="ref-10">C., William: Visualizing Data, Hobart Press, 1993, ISBN 9780963488404, <a href="http://dl.acm.org/citation.cfm?id=529269" rel="schema:citation">http://dl.acm.org/citation.cfm?id=529269</li>
+                                <li id="ref-10">Cleveland, W.: Visualizing Data, Hobart Press, 1993, ISBN 9780963488404, <a href="http://dl.acm.org/citation.cfm?id=529269" rel="schema:citation">http://dl.acm.org/citation.cfm?id=529269</a></li>
 
                                 <li id="ref-11">Heer, J., Maneesh, A.: Multi-Scale Banking to 45°, IEEE Transactions on Visualization and Computer Graphics, Vol. 12, No. 5, 2006, <a href="http://vis.berkeley.edu/papers/banking/2006-Banking-InfoVis.pdf" rel="schema:citation">http://vis.berkeley.edu/papers/banking/2006-Banking-InfoVis.pdf</a></li>
                             </ol>
